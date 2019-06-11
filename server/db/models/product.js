@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
+const colors = ['silver', 'gold', 'black', 'red']
+
 const Product = db.define('product', {
   name: {
     type: Sequelize.STRING,
@@ -45,8 +47,9 @@ const Product = db.define('product', {
       max: 12
     }
   },
-  colors: {
-    type: Sequelize.ENUM('Selection')
+  color: {
+    type: Sequelize.ENUM('Selection'),
+    values: colors
   },
   material: {
     type: Sequelize.ARRAY(Sequelize.TEXT)
