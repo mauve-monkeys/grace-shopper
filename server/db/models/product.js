@@ -18,8 +18,8 @@ const Product = db.define('product', {
       notEmpty: true
     }
   },
-  image: {
-    type: Sequelize.BLOB,
+  imageUrl: {
+    type: Sequelize.STRING,
     allowNull: false,
     validate: {
       notEmpty: true

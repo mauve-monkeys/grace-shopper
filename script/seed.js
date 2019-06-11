@@ -7,14 +7,14 @@ function generateProducts(num) {
   const products = new Array(num).fill({}).map(product => {
     const name = faker.commerce.productName()
     const description = faker.commerce.productAdjective()
-    const image = faker.image.abstract()
+    const imageUrl = faker.image.image()
     const price = faker.commerce.price()
     const SKU = ++productId
 
     return {
       name,
       description,
-      image,
+      imageUrl,
       price,
       SKU
     }
