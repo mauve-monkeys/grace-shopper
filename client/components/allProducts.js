@@ -16,11 +16,12 @@ class DisconnectedAllProducts extends React.Component {
       return <div>Loading...</div>
     }
     return (
-      <div>
+      <section id="all-products">
+        <h1>All Products</h1>
         {this.props.products.map(product => {
           return <SingleProduct key={product.id} product={product} />
         })}
-      </div>
+      </section>
     )
   }
 }

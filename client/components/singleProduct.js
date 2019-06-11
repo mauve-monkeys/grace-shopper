@@ -4,10 +4,13 @@ const SingleProduct = props => {
   const product = props.product
 
   return (
-    <div>
-      <h1>{product.name}</h1>
-      <img src={product.imageUrl} />
-    </div>
+    <section className="single-product">
+      <img className="product-image" src={product.imageUrl} />
+      <div>
+        <div className="product-name">{product.name}</div>
+        <div className="product-price">${product.price}</div>
+      </div>
+    </section>
   )
 }
 
