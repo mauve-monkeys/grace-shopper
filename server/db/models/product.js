@@ -40,13 +40,6 @@ const Product = db.define('product', {
       notEmpty: true
     }
   },
-  size: {
-    type: Sequelize.INTEGER,
-    validate: {
-      min: 4,
-      max: 12
-    }
-  },
   color: {
     type: Sequelize.ENUM('Selection'),
     values: colors

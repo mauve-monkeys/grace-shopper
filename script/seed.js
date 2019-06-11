@@ -10,15 +10,13 @@ function generateProducts(num) {
     const image = faker.image.abstract()
     const price = faker.commerce.price()
     const SKU = ++productId
-    const size = 4 + Math.round(Math.random() * (12 - 4))
 
     return {
       name,
       description,
       image,
       price,
-      SKU,
-      size
+      SKU
     }
   })
   return products
