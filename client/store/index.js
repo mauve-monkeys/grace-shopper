@@ -5,8 +5,7 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import cart from './cart'
 
-const reducer = combineReducers({user}, cart)
-//NB not sure why user is in curly braces
+const reducer = combineReducers({user, cart})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )

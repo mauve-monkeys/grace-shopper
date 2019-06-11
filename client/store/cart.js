@@ -22,43 +22,53 @@ export const getCartAction = cart => ({
   cart
 })
 
-export const addCartAction = product => ({
+export const addCartAction = (product, quantity = 1) => ({
   type: ADD_TO_CART,
-  product
+  product: {
+    ...product,
+    quantity
+  }
   ///product = {product id, quanity // default to 1, size}
 })
 
-export const deleteCartItem = item => ({
+export const deleteCartItemAction = item => ({
   type: DELETE_CART_ITEM,
   item
 })
 
-export const editItemQuanity = item => ({
+export const editItemQuanityAction = (item, value) => ({
   type: EDIT_QUANTITY,
-  item
+  item: {
+    ...item,
+    value
+  }
 })
 
 /**
  * THUNK CREATORS
  */
-// export const getCartThunk = () => {
-// return async(dispatch) => {
 
-//     try {
-//         if(localStorage.length > 0) {
+ //Where do we put this logic?
+export const addToCartThunk = (item) => {
+  return (dispatch) => {
+    if(localStorage.cart) {
+      localStorage.setItem("cart", [...localStorage.cart, item])
+    } else {
+      localStorage.setItem("cart", [item])
+    }
+    dispatch(addCartAction(item))
+  }
+}
 
-//
-//         } // need to localStore.setItem() in the the add to cart flow. This assumes THE KEYS ARE THE PRODUCT I
-//         else {
-//          const {data} = await axios.get("/api/cart") }
-//         // only handles pulling cart from the DB for now
-//         dispatch(getCartAction(data))
-//     } catch (error) {
-//         console.log("/api/cart get request failled")
-//         //Need convo on error handling
-//     }
-// }
-// }
+
+
+export const getCartThunk = () => {
+return (dispatch) => {
+  if(localStorage.cart) {
+    dispatch(getCartAction(localStorage.cart))
+  }
+  }
+}
 
 /**
  * REDUCER
