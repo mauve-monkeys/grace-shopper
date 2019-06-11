@@ -22,18 +22,24 @@ const defaultCart = {}
 /**
  * THUNK CREATORS
  */
-export const getCartThunk = () => {
-    return async(dispatch) => {
-        try {
-            const {data} = await axios.get("/api/cart") 
-            // only handles pulling cart from the DB for now
-            dispatch(getCartAction(data))
-        } catch (error) {
-            console.log("/api/cart get request failled")
-            //Need convo on error handling
-        }
-    }
-}
+// export const getCartThunk = () => {
+    // return async(dispatch) => {
+        
+    //     try {
+    //         if(localStorage.length > 0) {
+
+    //             
+    //         } // need to localStore.setItem() in the the add to cart flow. This assumes THE KEYS ARE THE PRODUCT I
+    //         else { 
+    //          const {data} = await axios.get("/api/cart") }
+    //         // only handles pulling cart from the DB for now
+    //         dispatch(getCartAction(data))
+    //     } catch (error) {
+    //         console.log("/api/cart get request failled")
+    //         //Need convo on error handling
+    //     }
+    // }
+// }    
 
 /**
  * REDUCER
