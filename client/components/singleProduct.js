@@ -5,10 +5,12 @@ const SingleProduct = props => {
 
   return (
     <section className="single-product">
-      <img className="product-image" src={product.imageUrl} />
-      <div>
-        <div className="product-name">{product.name}</div>
-        <div className="product-price">${product.price}</div>
+      <div id="productTile">
+        <img className="product-image" src={product.imageUrl} />
+        <div>
+          <div className="product-name">{product.name}</div>
+          <div className="product-price">${product.price}</div>
+        </div>
       </div>
     </section>
   )
