@@ -12,7 +12,17 @@ const EDIT_QUANTITY = 'EDIT_QUANTITY'
 /**
  * INITIAL STATE
  */
-const defaultCart = []
+const defaultCart = [
+  {
+    quantity: 3,
+    product: {
+      id: 1,
+      name: 'test product',
+      price: '12.99',
+      imageUrl: ''
+    }
+  }
+]
 
 /**
  * ACTION CREATORS
@@ -24,23 +34,23 @@ export const getCartAction = cart => ({
 
 export const addCartAction = (product, quantity = 1) => ({
   type: ADD_TO_CART,
-  product: {
-    ...product,
+  orderDetail: {
+    product: product,
     quantity
   }
   ///product = {product id, quanity // default to 1, size}
 })
 
-export const deleteCartItemAction = item => ({
+export const deleteCartItemAction = product => ({
   type: DELETE_CART_ITEM,
-  item
+  product
 })
 
-export const editItemQuanityAction = (item, value) => ({
+export const editItemQuanityAction = (product, quantity) => ({
   type: EDIT_QUANTITY,
-  item: {
-    ...item,
-    value
+  orderDetail: {
+    product: product,
+    quantity
   }
 })
 
@@ -77,21 +87,16 @@ export default function(state = defaultCart, action) {
     case GET_CART:
       return action.cart
     case ADD_TO_CART:
-      return [...state, action.product]
+      return [...state, action.orderDetail]
     case DELETE_CART_ITEM:
-      const updateState = state.filter(
-        productObj =>
-          productObj.id !== action.item.id &&
-          productObj.size !== action.item.size
-      )
-      return updateState
+      return state.filter(productObj => productObj.id !== action.product.id)
     case EDIT_QUANTITY:
-      const updatedState = state.filter(
-        productObj =>
-          productObj.id !== action.item.id &&
-          productObj.size !== action.item.size
-      )
-      return [...updatedState, action.item]
+      return [
+        ...state.filter(
+          productObj => productObj.product.id !== action.orderDetail.product.id
+        ),
+        action.orderDetail
+      ]
     default:
       return state
   }
