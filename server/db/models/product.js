@@ -1,8 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const colors = ['silver', 'gold', 'black', 'red']
-
 const Product = db.define('product', {
   name: {
     type: Sequelize.STRING,
@@ -27,10 +25,18 @@ const Product = db.define('product', {
     // defaultValue: ''
   },
   price: {
-    type: Sequelize.FLOAT,
-    allow: false,
+    type: Sequelize.INTEGER,
+    allowNull: false,
     validate: {
-      notEmpty: true
+      notEmpty: true,
+      min: 0,
+      isInt: true
+    },
+    get() {
+      return this.getDataValue('price') / 100
+    },
+    set(priceDecimal) {
+      this.setDataValue('price', priceDecimal * 100)
     }
   },
   SKU: {
@@ -40,12 +46,14 @@ const Product = db.define('product', {
       notEmpty: true
     }
   },
-  color: {
-    type: Sequelize.ENUM('Selection'),
-    values: colors
+  stone: {
+    type: Sequelize.ENUM(['diamond', 'ruby'])
   },
-  material: {
-    type: Sequelize.ARRAY(Sequelize.TEXT)
+  band: {
+    type: Sequelize.ENUM(['silver', 'gold'])
+  },
+  size: {
+    type: Sequelize.ENUM([3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
   }
 })
 
