@@ -53,7 +53,19 @@ const Product = db.define('product', {
     type: Sequelize.ENUM(['silver', 'gold'])
   },
   size: {
-    type: Sequelize.ENUM([3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
+    type: Sequelize.ENUM([
+      '3',
+      '4',
+      '5',
+      '6',
+      '7',
+      '8',
+      '9',
+      '10',
+      '11',
+      '12',
+      '13'
+    ])
   }
 })
 

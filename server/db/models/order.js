@@ -27,10 +27,20 @@ const Order = db.define('order', {
   }
 })
 
-// const calculateTotal = (order) => {
-//     order.total =
+// Order.prototype.getProducts = function() {
+//   return Order.findOne({
+//     where: {
+//       id: this.id
+//     },
+//     include: [{model: db.models.product}]
+//   })
 // }
 
-//Order.beforeCreate
+// const calculateTotal = async order => {
+//   const orderProducts = await order.getProducts()
+//   console.log('orderProducts', orderProducts)
+// }
+
+// Order.beforeUpdate(calculateTotal)
 
 module.exports = Order
