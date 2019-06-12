@@ -48,25 +48,23 @@ export const editItemQuanityAction = (item, value) => ({
  * THUNK CREATORS
  */
 
- //Where do we put this logic?
-export const addToCartThunk = (item) => {
-  return (dispatch) => {
-    if(localStorage.cart) {
-      localStorage.setItem("cart", [...localStorage.cart, item])
+//Where do we put this logic?
+export const addToCartThunk = item => {
+  return dispatch => {
+    if (localStorage.cart) {
+      localStorage.setItem('cart', [...localStorage.cart, item])
     } else {
-      localStorage.setItem("cart", [item])
+      localStorage.setItem('cart', [item])
     }
     dispatch(addCartAction(item))
   }
 }
 
-
-
 export const getCartThunk = () => {
-return (dispatch) => {
-  if(localStorage.cart) {
-    dispatch(getCartAction(localStorage.cart))
-  }
+  return dispatch => {
+    if (localStorage.cart) {
+      dispatch(getCartAction(localStorage.cart))
+    }
   }
 }
 
@@ -81,19 +79,19 @@ export default function(state = defaultCart, action) {
     case ADD_TO_CART:
       return [...state, action.product]
     case DELETE_CART_ITEM:
-      const udpateState = state.filter(
+      const updateState = state.filter(
         productObj =>
           productObj.id !== action.item.id &&
           productObj.size !== action.item.size
       )
-      return udpateState
+      return updateState
     case EDIT_QUANTITY:
-      const udpateState = state.filter(
+      const updatedState = state.filter(
         productObj =>
           productObj.id !== action.item.id &&
           productObj.size !== action.item.size
       )
-      return [...udpateState, action.item]
+      return [...updatedState, action.item]
     default:
       return state
   }
