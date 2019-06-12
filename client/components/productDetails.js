@@ -1,7 +1,6 @@
 import React from 'react'
 import {getProductDetailsThunk} from '../store/products'
 import {connect} from 'react-redux'
-// import SingleProduct from './singleProduct'
 
 class DisconnectedProductDetails extends React.Component {
   constructor() {
@@ -11,7 +10,7 @@ class DisconnectedProductDetails extends React.Component {
   componentDidMount() {
     try {
       console.log('mounting component')
-      this.props.DisconnectedProductDetails(this.props.match.params.id)
+      this.props.getProductDetails(this.props.match.params.id)
     } catch (error) {
       console.log(error)
     }
@@ -25,6 +24,11 @@ class DisconnectedProductDetails extends React.Component {
     return (
       <section id="product-details">
         <h1>{selected.name}</h1>
+        <img className="product-image" src={selected.imageUrl} />
+        <div>
+          <div className="product-name">{selected.name}</div>
+          <div className="product-price">${selected.price}</div>
+        </div>
       </section>
     )
   }
