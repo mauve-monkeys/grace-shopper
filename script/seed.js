@@ -43,24 +43,40 @@ function generateUsers(num) {
   return users
 }
 
+async function createOrders(num, products, users) {
+  // const orders = await db.models.order.bulkCreate(new Array(num).fill({}))
+  // let randInt = Math.floor(Math.random() * products.length)
+  // await orders.addProduct(products[randInt])
+  const order = await db.models.order.create({})
+  await order.addProduct(products[0])
+  await order.addProduct(products[1])
+  await users[0].addOrder(order)
+}
+
 async function seed(numProducts, numUsers) {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = generateUsers(numUsers)
+  const userData = generateUsers(numUsers)
+  const users = []
 
-  for (let i = 0; i < users.length; i++) {
-    await db.models.user.create(users[i])
+  for (let i = 0; i < userData.length; i++) {
+    let user = await db.models.user.create(userData[i])
+    users.push(user)
   }
 
-  const products = generateProducts(numProducts)
+  const productData = generateProducts(numProducts)
+  const products = []
 
-  for (let i = 0; i < products.length; i++) {
-    await db.models.product.create(products[i])
+  for (let i = 0; i < productData.length; i++) {
+    let product = await db.models.product.create(productData[i])
+    products.push(product)
   }
+
+  await createOrders(2, products, users)
 
   console.log(`seeded ${users.length} users`)
-  console.log(`seeded ${products.length}`)
+  console.log(`seeded ${products.length} products`)
   console.log(`seeded successfully`)
 }
 
