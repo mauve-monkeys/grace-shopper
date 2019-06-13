@@ -1,0 +1,30 @@
+/***************** ALL COLOR RELATED CSS *****************
+**********************************************************/
+
+// ------ Color Variables ------
+
+$navbar-bg-color: #222;
+$navbar-txt-color: #fff;
+$navbar-link-color: #fff;
+$navbar-link-visited: #cac7c7;
+$navbar-link-hover: rgb(157, 140, 235);
+
+// -- Navbar --
+
+#navbar {
+  background-color: $navbar-bg-color;
+  color: $navbar-txt-color;
+
+  a {
+    color: $navbar-link-color;
+  }
+
+  a:visited {
+    color: $navbar-link-visited;
+  }
+  a:hover {
+    color: $navbar-link-hover;
+  }
+}
+
+// ************************************************

@@ -1,0 +1,41 @@
+/************ ALL PAGE STRUCTURE RELATED CSS *************
+  Anything related to position/grid/flexbox go here
+**********************************************************/
+
+// ------ Variables ------
+$navbar-height: 150px;
+$header-height: 35px;
+$single-product-height: 300px;
+$single-product-width: 320px;
+
+// -- Navbar --
+#navbar {
+  position: fixed;
+  top: 0;
+  height: $navbar-height;
+}
+
+/* 
+  Make sure all the main content sections are not covered by the navbar
+
+  TO DO: add main-content className to all-products & product details and other future components that will sit below navbar
+*/
+.main-content,
+#all-products,
+#product-details {
+  // must interpolate sass variables to use them in calc
+  margin: calc(#{$navbar-height} + 20px) 20px 20px 20px;
+}
+
+#all-products {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  * {
+    margin: 10px;
+  }
+  h1 {
+    height: $header-height;
+    flex: 1 100%;
+  }
+}

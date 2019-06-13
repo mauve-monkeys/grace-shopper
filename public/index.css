@@ -16,6 +16,8 @@ html {
 
 body {
   font-family: sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 a {
@@ -34,4 +36,63 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+/***************** ALL COLOR RELATED CSS *****************
+**********************************************************/
+#navbar {
+  background-color: #222;
+  color: #fff;
+}
+#navbar a {
+  color: #fff;
+}
+#navbar a:visited {
+  color: #cac7c7;
+}
+#navbar a:hover {
+  color: #9d8ceb;
+}
+
+#navbar {
+  margin: 0;
+  width: 100vw;
+  padding: 10px;
+}
+#navbar h1 {
+  margin: 10px auto;
+  text-align: center;
+}
+
+/************ ALL PAGE STRUCTURE RELATED CSS *************
+  Anything related to position/grid/flexbox go here
+**********************************************************/
+#navbar {
+  position: fixed;
+  top: 0;
+  height: 150px;
+}
+
+/* 
+  Make sure all the main content sections are not covered by the navbar
+
+  TO DO: add main-content className to all-products & product details and other future components that will sit below navbar
+*/
+.main-content,
+#all-products,
+#product-details {
+  margin: calc(150px + 20px) 20px 20px 20px;
+}
+
+#all-products {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
+#all-products * {
+  margin: 10px;
+}
+#all-products h1 {
+  height: 35px;
+  flex: 1 100%;
 }

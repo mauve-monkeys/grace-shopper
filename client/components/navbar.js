@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
+  <section id="navbar">
     <h1>BOILERMAKER</h1>
     <nav>
       {isLoggedIn ? (
@@ -25,7 +25,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       )}
     </nav>
     <hr />
-  </div>
+  </section>
 )
 
 /**
