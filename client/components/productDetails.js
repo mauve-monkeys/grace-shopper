@@ -2,6 +2,7 @@ import React from 'react'
 import {getProductDetailsThunk} from '../store/products'
 import {connect} from 'react-redux'
 import AddCartButton from './add-cart-button'
+import {CartView} from '.'
 
 class DisconnectedProductDetails extends React.Component {
   constructor() {

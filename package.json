@@ -7,7 +7,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "build-client": "webpack",
+    "build-client": "webpack & npm run build-css",
     "build-client-watch": "webpack -w",
     "build-css": "node-sass-chokidar client/styles/index.scss -o public/",
     "watch-css": "npm run build-css && node-sass-chokidar client/styles/index.scss -o public/ --watch --recursive",
@@ -102,7 +102,6 @@
     "react-test-renderer": "^16.4.2",
     "redux-devtools-extension": "^2.13.5",
     "redux-mock-store": "^1.5.3",
-    "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "supertest": "^4.0.2",
     "webpack": "^4.16.4",
