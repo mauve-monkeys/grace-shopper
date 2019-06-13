@@ -4,9 +4,12 @@ import {editItemQuanityAction, deleteCartItemAction} from '../store/cart'
 import SingleProduct from './singleProduct'
 
 class CartView extends React.Component {
+  componentDidMount() {
+    console.log("I've made it to the cart component!")
+  }
   render() {
     return (
-      <div>
+      <div className="main-content">
         {this.props.cart.map(orderDetail => {
           return (
             <div key={orderDetail.product.id}>
