@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import {token} from '/Users/nicolebent/Desktop/GHP_1094/Senior-Phase/grace-shopper/secrets.js'
 
 /**
  * ACTION TYPES
@@ -48,7 +49,9 @@ export const getProducts = () => {
 export const getProductDetailsThunk = id => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`/api/products/${id}`)
+      const {data} = await axios.get(`/api/products/${id}`, {
+        headers: {Authorization: `bearer ${token}`}
+      })
       dispatch(gotSingleProduct(data))
     } catch (error) {
       console.error(error.stack)
