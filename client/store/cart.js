@@ -59,10 +59,12 @@ export const editItemQuanityAction = (product, quantity) => ({
  */
 
 //Where do we put this logic?
-export const addToCartLoggedInThunk = product => {
-  return dispatch => {
+export const addToCartLoggedInThunk = (product, userId) => {
+  return async dispatch => {
     try {
-      // const {data} = await axios.put('/api/cart', item) //// we need to update this
+      await axios.put(`/api/orders/${userId}/cart/add`, {
+        productId: product.id
+      }) //// we need to update this
       dispatch(addCartAction(product))
     } catch (error) {
       console.error(error)

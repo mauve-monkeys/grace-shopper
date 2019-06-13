@@ -45,3 +45,27 @@ router.get('/:userId', async (req, res, next) => {
     next(error)
   }
 })
+
+router.put('/:userId/cart/add', async (req, res, next) => {
+  try {
+    const [order] = await Order.findOrCreate({
+      where: {
+        userId: +req.params.userId,
+        status: 'pending'
+      }
+    })
+
+    const product = await Product.findOne({
+      where: {
+        id: +req.body.productId
+      }
+    })
+    if (!product) {
+      res.status(404).send('Product not found')
+    }
+    await order.addProduct(product)
+    res.status(201).send()
+  } catch (err) {
+    next(err)
+  }
+})
