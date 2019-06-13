@@ -59,14 +59,25 @@ export const editItemQuanityAction = (product, quantity) => ({
  */
 
 //Where do we put this logic?
-export const addToCartThunk = item => {
+export const addToCartLoggedInThunk = product => {
   return dispatch => {
-    if (localStorage.cart) {
-      localStorage.setItem('cart', [...localStorage.cart, item])
-    } else {
-      localStorage.setItem('cart', [item])
+    try {
+      // const {data} = await axios.put('/api/cart', item) //// we need to update this
+      dispatch(addCartAction(product))
+    } catch (error) {
+      console.error(error)
     }
-    dispatch(addCartAction(item))
+  }
+}
+
+export const addToCartGuestThunk = product => {
+  return dispatch => {
+    // if (localStorage.cart) {
+    //   localStorage.setItem('cart', [...localStorage.cart, product])
+    // } else {
+    //   localStorage.setItem('cart', [product])
+    // }
+    dispatch(addCartAction(product))
   }
 }
 
