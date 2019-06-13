@@ -4,11 +4,10 @@ const db = require('../db')
 
 const User = db.define('user', {
   username: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    type: Sequelize.STRING
+    // validate: {
+    //   notEmpty: true
+    // }
   },
   email: {
     type: Sequelize.STRING,
@@ -35,32 +34,28 @@ const User = db.define('user', {
     type: Sequelize.STRING
   },
   firstName: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    type: Sequelize.STRING
+    // validate: {
+    //   notEmpty: true
+    // }
   },
   lastName: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    type: Sequelize.STRING
+    // validate: {
+    //   notEmpty: true
+    // }
   },
   billingAddress: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    type: Sequelize.STRING
+    // validate: {
+    //   notEmpty: true
+    // }
   },
   shippingAddress: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    type: Sequelize.STRING
+    // validate: {
+    //   notEmpty: true
+    // }
   },
   phoneNumber: {
     type: Sequelize.STRING
