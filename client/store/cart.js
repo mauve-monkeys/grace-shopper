@@ -14,12 +14,12 @@ const EDIT_QUANTITY = 'EDIT_QUANTITY'
  */
 const defaultCart = [
   {
-    quantity: 3,
-    product: {
-      id: 1,
-      name: 'test product',
-      price: '12.99',
-      imageUrl: ''
+    id: 1,
+    name: 'test product',
+    price: '12.99',
+    imageUrl: '',
+    orderDetail: {
+      quantity: 3
     }
   }
 ]
@@ -34,9 +34,14 @@ export const getCartAction = cart => ({
 
 export const addCartAction = (product, quantity = 1) => ({
   type: ADD_TO_CART,
-  orderDetail: {
-    product: product,
-    quantity
+  product: {
+    id: product.id,
+    name: product.name,
+    price: product.price,
+    imageUrl: product.imageUrl,
+    orderDetail: {
+      quanity: quantity
+    }
   }
   ///product = {product id, quanity // default to 1, size}
 })
@@ -48,9 +53,14 @@ export const deleteCartItemAction = product => ({
 
 export const editItemQuanityAction = (product, quantity) => ({
   type: EDIT_QUANTITY,
-  orderDetail: {
-    product: product,
-    quantity
+  product: {
+    id: product.id,
+    name: product.name,
+    price: product.price,
+    imageUrl: product.imageUrl,
+    orderDetail: {
+      quanity: quantity
+    }
   }
 })
 
@@ -83,10 +93,26 @@ export const addToCartGuestThunk = product => {
   }
 }
 
-export const getCartThunk = () => {
+export const getCartGuestThunk = () => {
   return dispatch => {
-    if (localStorage.cart) {
+    try {
       dispatch(getCartAction(localStorage.cart))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+export const getCartUserThunk = userId => {
+  console.log('getcartuserthunk1')
+  return async dispatch => {
+    try {
+      console.log('getcartuserthunk')
+      const [cart] = await axios.get(`/api/orders/${userId}/cart`)
+      console.log('cart', cart)
+      dispatch(getCartAction(cart.products))
+    } catch (error) {
+      console.error(error)
     }
   }
 }
@@ -100,15 +126,15 @@ export default function(state = defaultCart, action) {
     case GET_CART:
       return action.cart
     case ADD_TO_CART:
-      return [...state, action.orderDetail]
+      return [...state, action.product]
     case DELETE_CART_ITEM:
       return state.filter(productObj => productObj.id !== action.product.id)
     case EDIT_QUANTITY:
       return [
         ...state.filter(
-          productObj => productObj.product.id !== action.orderDetail.product.id
+          productObj => productObj.product.id !== action.product.id
         ),
-        action.orderDetail
+        action.product
       ]
     default:
       return state

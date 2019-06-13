@@ -1,24 +1,36 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {editItemQuanityAction, deleteCartItemAction} from '../store/cart'
+import {
+  editItemQuanityAction,
+  deleteCartItemAction,
+  getCartUserThunk,
+  getCartGuestThunk
+} from '../store/cart'
 import SingleProduct from './singleProduct'
 
 class CartView extends React.Component {
+  componentDidMount() {
+    const getCart = this.props.isLoggedIn
+      ? this.props.getCartUser
+      : this.props.getCartGuest
+
+    console.log('cart', this.props.cart)
+    console.log('user', this.props.user)
+
+    getCart(this.props.user.id)
+  }
   render() {
     return (
       <div className="main-content">
-        {this.props.cart.map(orderDetail => {
+        {this.props.cart.map(product => {
           return (
-            <div key={orderDetail.product.id}>
-              <SingleProduct product={orderDetail.product} />
-              <p>Quantity: {orderDetail.quantity}</p>
+            <div key={product.id}>
+              <SingleProduct product={product} />
+              <p>Quantity: {product.orderDetail.quantity}</p>
               <select
                 name="quanity"
                 onChange={event =>
-                  this.props.editQuantity(
-                    orderDetail.product,
-                    event.target.value
-                  )
+                  this.props.editQuantity(product, event.target.value)
                 }
               >
                 <option value="1">1</option>
@@ -29,7 +41,7 @@ class CartView extends React.Component {
               </select>
               <button
                 type="button"
-                onClick={() => this.props.deleteItem(orderDetail.product)}
+                onClick={() => this.props.deleteItem(product)}
               >
                 Delete
               </button>
@@ -42,12 +54,16 @@ class CartView extends React.Component {
 }
 
 const mapState = state => ({
-  cart: state.cart
+  cart: state.cart,
+  isLoggedIn: !!state.user.id,
+  user: state.user
 })
 
 const mapDispatch = dispatch => ({
   editQuantity: (item, value) => dispatch(editItemQuanityAction(item, value)),
-  deleteItem: item => dispatch(deleteCartItemAction(item))
+  deleteItem: item => dispatch(deleteCartItemAction(item)),
+  getCartUser: userId => dispatch(getCartUserThunk(userId)),
+  getCartGuest: () => dispatch(getCartGuestThunk())
 })
 
 export default connect(mapState, mapDispatch)(CartView)
