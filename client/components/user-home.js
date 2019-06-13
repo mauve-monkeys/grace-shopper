@@ -1,16 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import Orders from './orderHistory'
 
 /**
  * COMPONENT
  */
 export const UserHome = props => {
-  const {email} = props
+  const {email, firstName, id} = props
+  const displayName = firstName || email
 
   return (
     <div className="main-content">
-      <h3>Welcome, {email}</h3>
+      <h3>Welcome, {displayName}</h3>
+      <Orders />
     </div>
   )
 }
@@ -20,7 +23,9 @@ export const UserHome = props => {
  */
 const mapState = state => {
   return {
-    email: state.user.email
+    email: state.user.email,
+    firstName: state.user.firstName,
+    id: state.user.id
   }
 }
 
