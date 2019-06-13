@@ -9,16 +9,16 @@ import {
 import SingleProduct from './singleProduct'
 
 class CartView extends React.Component {
-  componentDidMount() {
-    const getCart = this.props.isLoggedIn
-      ? this.props.getCartUser
-      : this.props.getCartGuest
+  // componentDidMount() {
+  //   const getCart = this.props.isLoggedIn
+  //     ? this.props.getCartUser
+  //     : this.props.getCartGuest
 
-    console.log('cart', this.props.cart)
-    console.log('user', this.props.user)
+  //   console.log('cart', this.props.cart)
+  //   console.log('user', this.props.user)
 
-    getCart(this.props.user.id)
-  }
+  //   getCart(this.props.user.id)
+  // }
   render() {
     return (
       <div className="main-content">

@@ -96,7 +96,8 @@ export const addToCartGuestThunk = product => {
 export const getCartGuestThunk = () => {
   return dispatch => {
     try {
-      dispatch(getCartAction(localStorage.cart))
+      console.log('guestcartthunk')
+      dispatch(getCartAction([]))
     } catch (error) {
       console.error(error)
     }
@@ -104,13 +105,11 @@ export const getCartGuestThunk = () => {
 }
 
 export const getCartUserThunk = userId => {
-  console.log('getcartuserthunk1')
   return async dispatch => {
     try {
-      console.log('getcartuserthunk')
-      const [cart] = await axios.get(`/api/orders/${userId}/cart`)
-      console.log('cart', cart)
-      dispatch(getCartAction(cart.products))
+      const {data} = await axios.get(`/api/orders/${userId}/cart`)
+
+      dispatch(getCartAction(data[0].products))
     } catch (error) {
       console.error(error)
     }
