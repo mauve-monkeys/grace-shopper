@@ -4,9 +4,6 @@ import {editItemQuanityAction, deleteCartItemAction} from '../store/cart'
 import SingleProduct from './singleProduct'
 
 class CartView extends React.Component {
-  componentDidMount() {
-    console.log("I've made it to the cart component!")
-  }
   render() {
     return (
       <div className="main-content">
