@@ -7,7 +7,7 @@ function generateProducts(num) {
   const products = new Array(num).fill({}).map(product => {
     const name = faker.commerce.productName()
     const description = faker.commerce.productAdjective()
-    const imageUrl = faker.image.image()
+    const imageUrl = 'https://loremflickr.com/320/240/dog'
     const price = faker.commerce.price()
     const SKU = ++productId
 
