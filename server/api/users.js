@@ -15,3 +15,21 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.put('/:userId/edit', async (req, res, next) => {
+  try {
+    await User.update(
+      {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        shippingAddress: req.body.shippingAddress,
+        billingAddress: req.body.billingAddress
+      },
+      {
+        where: {id: req.params.userId}
+      }
+    )
+  } catch (error) {
+    next(error)
+  }
+})
