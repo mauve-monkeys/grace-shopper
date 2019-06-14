@@ -69,6 +69,16 @@ export const editItemQuanityAction = (product, quantity) => ({
  */
 
 //Where do we put this logic?
+/// [{id,  orderDetail.quantity}, {id, orderDetail.quanity} ]
+/// "id:quanty,id2:quantity2"
+const serializeCart = cart => {
+  return JSON.stringify(cart)
+}
+
+const deSerializeCart = stringifiedCart => {
+  return JSON.parse(stringifiedCart)
+}
+
 export const addToCartLoggedInThunk = (product, userId) => {
   return async dispatch => {
     try {
@@ -83,12 +93,11 @@ export const addToCartLoggedInThunk = (product, userId) => {
 }
 
 export const addToCartGuestThunk = product => {
-  return dispatch => {
-    // if (localStorage.cart) {
-    //   localStorage.setItem('cart', [...localStorage.cart, product])
-    // } else {
-    //   localStorage.setItem('cart', [product])
-    // }
+  return (dispatch, getState) => {
+    const {cart} = getState()
+    const newCart = [...cart, product]
+    console.log(newCart, 'newCart in add to cart guest thunk!')
+    localStorage.setItem('GScart', serializeCart(newCart))
     dispatch(addCartAction(product))
   }
 }
@@ -109,7 +118,7 @@ export const getCartUserThunk = userId => {
     try {
       const {data} = await axios.get(`/api/orders/${userId}/cart`)
 
-      dispatch(getCartAction(data[0].products))
+      dispatch(getCartAction(data.products))
     } catch (error) {
       console.error(error)
     }
