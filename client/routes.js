@@ -11,13 +11,22 @@ import {
   CartView
 } from './components'
 import {me} from './store'
+import {getCartUserThunk, getCartGuestThunk} from './store/cart'
 
 /**
  * COMPONENT
  */
 class Routes extends Component {
   componentDidMount() {
-    this.props.loadInitialData()
+    this.props.getUser()
+  }
+
+  componentDidUpdate() {
+    const getCart = this.props.user.id
+      ? this.props.getCartUser
+      : this.props.getCartGuest
+
+    getCart(this.props.user.id)
   }
 
   render() {
@@ -55,15 +64,16 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    user: state.user
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    loadInitialData() {
-      dispatch(me())
-    }
+    getUser: () => dispatch(me()),
+    getCartUser: id => dispatch(getCartUserThunk(id)),
+    getCartGuest: () => dispatch(getCartGuestThunk())
   }
 }
 
@@ -75,6 +85,6 @@ export default withRouter(connect(mapState, mapDispatch)(Routes))
  * PROP TYPES
  */
 Routes.propTypes = {
-  loadInitialData: PropTypes.func.isRequired,
+  getUser: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired
 }
