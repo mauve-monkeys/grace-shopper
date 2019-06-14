@@ -30,6 +30,7 @@ class DisconnectedOrders extends React.Component {
               <th>Order Id</th>
               <th>Date Purchased</th>
               <th>Total Amount</th>
+              <th>Order Status</th>
             </tr>
           </thead>
           <tbody>

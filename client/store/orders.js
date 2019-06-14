@@ -16,9 +16,8 @@ const getOrders = orders => ({type: GET_ORDERS, orders})
 
 export const getOrdersThunk = userId => async dispatch => {
   try {
-    const {data} = await axios.get(`/${userId}/cart`)
+    const {data} = await axios.get(`/api/orders/${userId}/cart`)
     if (data) {
-      console.log(data, 'THIS IS THE ORDERS THUNK!!!')
       dispatch(getOrders(data))
     }
   } catch (error) {
