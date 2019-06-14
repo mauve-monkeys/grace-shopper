@@ -21,7 +21,6 @@ class DisconnectedOrders extends React.Component {
       return <div />
     }
     const orders = this.props.orders
-    console.log('I AM HERE!!', this.props)
     return (
       <section id="orders-table">
         <h1>Order History</h1>

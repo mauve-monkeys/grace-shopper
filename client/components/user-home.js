@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import Orders from './orderHistory'
+import UserDetails from './profileForm'
 
 /**
  * COMPONENT
@@ -14,6 +15,9 @@ export const UserHome = props => {
     <div className="main-content">
       <h3>Welcome, {displayName}</h3>
       <Orders />
+      <button type="button" Link to UserDetails>
+        Edit Profile here
+      </button>
     </div>
   )
 }
