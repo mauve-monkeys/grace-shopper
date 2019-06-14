@@ -13,15 +13,15 @@ const EDIT_QUANTITY = 'EDIT_QUANTITY'
  * INITIAL STATE
  */
 const defaultCart = [
-  {
-    id: 1,
-    name: 'test product',
-    price: '12.99',
-    imageUrl: '',
-    orderDetail: {
-      quantity: 3
-    }
-  }
+  // {
+  //   id: 1,
+  //   name: 'test product',
+  //   price: '12.99',
+  //   imageUrl: '',
+  //   orderDetail: {
+  //     quantity: 3
+  //   }
+  // }
 ]
 
 /**
@@ -105,8 +105,9 @@ export const addToCartGuestThunk = product => {
 export const getCartGuestThunk = () => {
   return dispatch => {
     try {
-      console.log('guestcartthunk')
-      dispatch(getCartAction([]))
+      const cart = deSerializeCart(localStorage.getItem('GScart'))
+      console.log(cart, "I'm the deserialized cart in the guest thunk")
+      dispatch(getCartAction(cart))
     } catch (error) {
       console.error(error)
     }
