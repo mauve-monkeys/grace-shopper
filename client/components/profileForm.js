@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getUserDetailsThunk} from './user-home'
+import {getUserDetailsThunk} from '../store/user'
 
 class ProfileForm extends React.Component {
   constructor() {
@@ -8,7 +8,7 @@ class ProfileForm extends React.Component {
     this.state = {}
   }
   componentDidMount() {
-    this.props.getUserDetailsThunk(userId)
+    // this.props.getUserDetails(userId)
   }
   render() {
     if (!this.props.orders) {

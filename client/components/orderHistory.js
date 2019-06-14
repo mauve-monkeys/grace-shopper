@@ -10,11 +10,11 @@ class DisconnectedOrders extends React.Component {
     this.state = {}
   }
   componentDidMount() {
-    // try {
-    //   this.props.getOrders(this.props.user.id)
-    // } catch (error) {
-    //   console.log(error)
-    // }
+    try {
+      this.props.getOrders(this.props.user.id)
+    } catch (error) {
+      console.log(error)
+    }
   }
   render() {
     if (!this.props.orders) {
