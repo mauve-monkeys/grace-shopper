@@ -75,12 +75,16 @@ form div {
 
 /* 
   Make sure all the main content sections are not covered by the navbar
-
-  TO DO: add main-content className to all-products & product details and other future components that will sit below navbar
 */
-.main-content,
-#all-products,
-#product-details {
+main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* account for nav height */
+  height: calc(100vh - 150px);
+}
+main > * {
   margin: calc(150px + 20px) 20px 20px 20px;
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getUserDetailsThunk} from './user-home'
+import {getUserDetailsThunk} from '../store/user'
 
 class ProfileForm extends React.Component {
   constructor() {

@@ -17,16 +17,23 @@ $single-product-width: 320px;
 
 /* 
   Make sure all the main content sections are not covered by the navbar
-
-  TO DO: add main-content className to all-products & product details and other future components that will sit below navbar
 */
-.main-content,
-#all-products,
-#product-details {
-  // must interpolate sass variables to use them in calc
-  margin: calc(#{$navbar-height} + 20px) 20px 20px 20px;
+
+main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* account for nav height */
+  height: calc(100vh - #{$navbar-height});
+  > * {
+    // all direct descendents of main
+    // must interpolate sass variables to use them in calc
+    margin: calc(#{$navbar-height} + 20px) 20px 20px 20px;
+  }
 }
 
+// -- AllProducts --
 #all-products {
   display: flex;
   flex-flow: row wrap;

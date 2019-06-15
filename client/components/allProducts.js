@@ -2,6 +2,7 @@ import React from 'react'
 import {getProducts} from '../store/products'
 import {connect} from 'react-redux'
 import SingleProduct from './singleProduct'
+import Loading from './loading'
 
 class DisconnectedAllProducts extends React.Component {
   constructor() {
@@ -12,8 +13,8 @@ class DisconnectedAllProducts extends React.Component {
     this.props.getProducts()
   }
   render() {
-    if (!this.props.products) {
-      return <div>Loading...</div>
+    if (this.props.loading) {
+      return <Loading />
     }
     return (
       <section id="all-products">
@@ -31,7 +32,8 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const mapStateToProps = state => ({
-  products: state.products.all
+  products: state.products.all,
+  loading: state.products.loadingAll
 })
 
 const AllProducts = connect(mapStateToProps, mapDispatchToProps)(

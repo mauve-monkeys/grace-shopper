@@ -13,7 +13,9 @@ const GOT_SINGLE_PRODUCT = 'GOT_SINGLE_PRODUCT'
 
 const initialState = {
   all: [], //list of objects which represent products
-  selected: {}
+  selected: {},
+  loadingAll: true,
+  loadingSelected: true
 }
 
 /**
@@ -64,12 +66,14 @@ export default function(state = initialState, action) {
     case GOT_ALL_PRODUCTS:
       return {
         ...state,
-        all: action.data
+        all: action.data,
+        loadingAll: false
       }
     case GOT_SINGLE_PRODUCT:
       return {
         ...state,
-        selected: action.product
+        selected: action.product,
+        loadingSelected: false
       }
     default:
       return state
