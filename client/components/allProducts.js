@@ -1,5 +1,5 @@
 import React from 'react'
-import {getProducts} from '../store/products'
+import {getProducts, resetLoading} from '../store/products'
 import {connect} from 'react-redux'
 import SingleProduct from './singleProduct'
 import Loading from './loading'
@@ -11,6 +11,9 @@ class DisconnectedAllProducts extends React.Component {
   }
   componentDidMount() {
     this.props.getProducts()
+  }
+  componentWillUnmount() {
+    this.props.resetLoading('all')
   }
   render() {
     if (this.props.loading) {
@@ -28,7 +31,8 @@ class DisconnectedAllProducts extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  getProducts: () => dispatch(getProducts())
+  getProducts: () => dispatch(getProducts()),
+  resetLoading: which => dispatch(resetLoading(which))
 })
 
 const mapStateToProps = state => ({

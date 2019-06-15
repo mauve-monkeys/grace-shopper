@@ -9,6 +9,8 @@ $navbar-link-color: #fff;
 $navbar-link-visited: #cac7c7;
 $navbar-link-hover: rgb(157, 140, 235);
 
+$loading-spinner: #222;
+
 // -- Navbar --
 
 #navbar {
@@ -25,6 +27,12 @@ $navbar-link-hover: rgb(157, 140, 235);
   a:hover {
     color: $navbar-link-hover;
   }
+}
+
+// -- Loading Spinner --
+
+#loading-spinner {
+  color: $loading-spinner;
 }
 
 // ************************************************

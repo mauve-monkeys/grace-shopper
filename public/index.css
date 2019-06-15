@@ -54,6 +54,10 @@ form div {
   color: #9d8ceb;
 }
 
+#loading-spinner {
+  color: #222;
+}
+
 #navbar {
   margin: 0;
   width: 100vw;
