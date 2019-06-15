@@ -3,8 +3,13 @@ import React from 'react'
 const Loading = () => {
   return (
     <section id="loading-spinner">
-      <h2>Loading...</h2>
-      <i className="fas fa-spinner fa-10x fa-spin" />
+      <div id="loading-container">
+        <div className="loading-ball" />
+        <div className="loading-ball" />
+        <div className="loading-ball" />
+        <div className="loading-ball" />
+      </div>
+      <p>Loading...</p>
     </section>
   )
 }
