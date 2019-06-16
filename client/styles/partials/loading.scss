@@ -16,9 +16,22 @@ $ball-size: 20px;
   }
 }
 
+@keyframes loading-text {
+  0% {
+    content: 'Loading';
+  }
+  25% {
+    content: 'Loading.';
+  }
+  50% {
+    content: 'Loading..';
+  }
+  75% {
+    content: 'Loading...';
+  }
+}
+
 #loading-container {
-  display: flex;
-  justify-content: space-around;
   height: calc(#{$bounce-height} + 20px);
   width: $loading-width;
   align-content: center;
@@ -59,9 +72,16 @@ $ball-size: 20px;
   animation-delay: 0.6s;
 }
 
-#loading-spinner {
-  p {
-    font-style: italic;
-    text-align: center;
-  }
+.loading-text {
+  position: relative;
+  left: calc((#{$loading-width}/ 2) - 20px);
+}
+.loading-text::after {
+  content: 'Loading';
+  font-style: italic;
+
+  animation-name: loading-text;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }

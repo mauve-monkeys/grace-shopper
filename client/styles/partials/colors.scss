@@ -35,10 +35,8 @@ $loading-ball-color4: #cb6ce7;
 
 // -- Loading Spinner --
 
-#loading-spinner {
-  p {
-    color: $loading-spinner-text;
-  }
+.loading-text {
+  color: $loading-spinner-text;
 }
 
 // ************************************************

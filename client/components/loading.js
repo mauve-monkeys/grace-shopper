@@ -9,7 +9,7 @@ const Loading = () => {
         <div className="loading-ball" />
         <div className="loading-ball" />
       </div>
-      <p>Loading...</p>
+      <div className="loading-text" />
     </section>
   )
 }

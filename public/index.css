@@ -54,7 +54,7 @@ form div {
   color: #9d8ceb;
 }
 
-#loading-spinner p {
+.loading-text {
   color: #929090;
 }
 
@@ -105,6 +105,16 @@ main > * {
   flex: 1 100%;
 }
 
+#loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+#loading-spinner #loading-container {
+  display: flex;
+  justify-content: space-around;
+}
+
 @keyframes bounce {
   0% {
     bottom: calc(100px * -1);
@@ -116,9 +126,22 @@ main > * {
   }
 }
 
+@keyframes loading-text {
+  0% {
+    content: 'Loading';
+  }
+  25% {
+    content: 'Loading.';
+  }
+  50% {
+    content: 'Loading..';
+  }
+  75% {
+    content: 'Loading...';
+  }
+}
+
 #loading-container {
-  display: flex;
-  justify-content: space-around;
   height: calc(100px + 20px);
   width: 200px;
   align-content: center;
@@ -158,7 +181,16 @@ main > * {
   animation-delay: 0.6s;
 }
 
-#loading-spinner p {
+.loading-text {
+  position: relative;
+  left: calc((200px / 2) - 20px);
+}
+
+.loading-text::after {
+  content: 'Loading';
   font-style: italic;
-  text-align: center;
+  animation-name: loading-text;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }

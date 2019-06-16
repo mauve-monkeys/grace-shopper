@@ -46,3 +46,16 @@ main {
     flex: 1 100%;
   }
 }
+
+// -- Loading Spinner --
+
+#loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+
+  #loading-container {
+    display: flex;
+    justify-content: space-around;
+  }
+}
