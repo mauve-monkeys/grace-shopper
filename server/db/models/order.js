@@ -27,20 +27,46 @@ const Order = db.define('order', {
   }
 })
 
-// Order.prototype.getProducts = function() {
-//   return Order.findOne({
-//     where: {
-//       id: this.id
-//     },
-//     include: [{model: db.models.product}]
-//   })
-// }
+Order.prototype.addProductCustom = async function(product) {
+  try {
+    await this.addProduct(product)
+    this.total += product.dataValues.price
+    await Order.update(
+      {
+        total: this.total
+      },
+      {
+        where: {
+          id: this.id
+        }
+      }
+    )
+    return this.total.price
+  } catch (error) {
+    console.log('custom add products not working')
+    console.log(error)
+  }
+}
 
-// const calculateTotal = async order => {
-//   const orderProducts = await order.getProducts()
-//   console.log('orderProducts', orderProducts)
-// }
-
-// Order.beforeUpdate(calculateTotal)
+Order.prototype.removeProductCustom = async function(product) {
+  try {
+    await this.removeProduct(product)
+    this.total -= product.dataValues.price
+    await Order.update(
+      {
+        total: this.total
+      },
+      {
+        where: {
+          id: this.id
+        }
+      }
+    )
+    return this.total.price
+  } catch (error) {
+    console.log('custom remove products not working')
+    console.log(error)
+  }
+}
 
 module.exports = Order

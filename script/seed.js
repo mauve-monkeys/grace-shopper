@@ -48,15 +48,15 @@ async function createOrders(num, products, users) {
   // let randInt = Math.floor(Math.random() * products.length)
   // await orders.addProduct(products[randInt])
   const order = await db.models.order.create({})
-  await order.addProduct(products[0])
-  await order.addProduct(products[1])
+  await order.addProductCustom(products[0])
+  await order.addProductCustom(products[1])
   await users[0].addOrder(order)
 
   const order2 = await db.models.order.create({
     status: 'confirmed'
   })
-  await order2.addProduct(products[1])
-  await order2.addProduct(products[2])
+  await order2.addProductCustom(products[1])
+  await order2.addProductCustom(products[2])
   await users[1].addOrder(order2)
 }
 
