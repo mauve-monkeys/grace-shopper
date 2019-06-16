@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
+// const Product = require('./product')
+// const OrderDetail = require('./orderDetail')
 
 const Order = db.define('order', {
   status: {
@@ -30,7 +32,7 @@ const Order = db.define('order', {
 Order.prototype.addProductCustom = async function(product) {
   try {
     const orderDetail = await this.addProduct(product)
-    this.total += product.dataValues.price
+    this.total += product.dataValues.price * orderDetail[0].dataValues.quantity
     this.orderSize += orderDetail[0].dataValues.quantity
     await Order.update(
       {
@@ -53,7 +55,7 @@ Order.prototype.addProductCustom = async function(product) {
 Order.prototype.removeProductCustom = async function(product) {
   try {
     const orderDetail = await this.removeProduct(product)
-    this.total -= product.dataValues.price
+    this.total -= product.dataValues.price * orderDetail[0].dataValues.quantity
     this.orderSize -= orderDetail[0].dataValues.quantity
     await Order.update(
       {
