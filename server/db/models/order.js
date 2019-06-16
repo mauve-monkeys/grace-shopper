@@ -29,11 +29,13 @@ const Order = db.define('order', {
 
 Order.prototype.addProductCustom = async function(product) {
   try {
-    await this.addProduct(product)
+    const orderDetail = await this.addProduct(product)
     this.total += product.dataValues.price
+    this.orderSize += orderDetail[0].dataValues.quantity
     await Order.update(
       {
-        total: this.total
+        total: this.total,
+        orderSize: this.orderSize
       },
       {
         where: {
@@ -50,11 +52,13 @@ Order.prototype.addProductCustom = async function(product) {
 
 Order.prototype.removeProductCustom = async function(product) {
   try {
-    await this.removeProduct(product)
+    const orderDetail = await this.removeProduct(product)
     this.total -= product.dataValues.price
+    this.orderSize -= orderDetail[0].dataValues.quantity
     await Order.update(
       {
-        total: this.total
+        total: this.total,
+        orderSize: this.orderSize
       },
       {
         where: {
