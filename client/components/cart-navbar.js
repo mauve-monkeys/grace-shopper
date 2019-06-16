@@ -3,7 +3,12 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
 const CartNavbar = props => {
-  const cartNum = props.cart.length
+  let cartNum
+  if (props.cart) {
+    cartNum = props.cart.length
+  } else {
+    cartNum = 0
+  }
   return (
     <Link to="/cart">
       <i className="fas fa-shopping-cart" />

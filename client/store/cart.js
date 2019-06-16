@@ -12,17 +12,15 @@ const EDIT_QUANTITY = 'EDIT_QUANTITY'
 /**
  * INITIAL STATE
  */
-const defaultCart = [
-  // {
-  //   id: 1,
-  //   name: 'test product',
-  //   price: '12.99',
-  //   imageUrl: '',
-  //   orderDetail: {
-  //     quantity: 3
-  //   }
-  // }
-]
+const defaultCart = [] // {
+//   id: 1,
+//   name: 'test product',
+//   price: '12.99',
+//   imageUrl: '',
+//   orderDetail: {
+//     quantity: 3
+//   }
+// }
 
 /**
  * ACTION CREATORS
@@ -93,10 +91,19 @@ export const addToCartLoggedInThunk = (product, userId) => {
 }
 
 export const addToCartGuestThunk = product => {
-  return (dispatch, getState) => {
-    const {cart} = getState()
+  return dispatch => {
+    let cart = deSerializeCart(localStorage.getItem('GScart'))
+    if (cart === null) {
+      cart = []
+    }
     const newCart = [...cart, product]
-    console.log(newCart, 'newCart in add to cart guest thunk!')
+    if (newCart[newCart.length - 1].orderDetail) {
+      newCart[newCart.length - 1].orderDetail.quantity++
+    } else {
+      newCart[newCart.length - 1].orderDetail = {
+        quantity: 1
+      }
+    }
     localStorage.setItem('GScart', serializeCart(newCart))
     dispatch(addCartAction(product))
   }
@@ -106,7 +113,6 @@ export const getCartGuestThunk = () => {
   return dispatch => {
     try {
       const cart = deSerializeCart(localStorage.getItem('GScart'))
-      console.log(cart, "I'm the deserialized cart in the guest thunk")
       dispatch(getCartAction(cart))
     } catch (error) {
       console.error(error)
@@ -135,7 +141,10 @@ export default function(state = defaultCart, action) {
     case GET_CART:
       return action.cart
     case ADD_TO_CART:
-      return [...state, action.product]
+      if (state === null) {
+        state = []
+      }
+      return [...state, {...action.product}]
     case DELETE_CART_ITEM:
       return state.filter(productObj => productObj.id !== action.product.id)
     case EDIT_QUANTITY:
