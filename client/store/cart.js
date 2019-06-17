@@ -9,10 +9,17 @@ const ADD_TO_CART = 'ADD_TO_CART'
 const DELETE_CART_ITEM = 'DELETE_CART_ITEM'
 const EDIT_QUANTITY = 'EDIT_QUANTITY'
 
+const serializeCart = cart => {
+  return JSON.stringify(cart)
+}
+
+const deSerializeCart = stringifiedCart => {
+  return JSON.parse(stringifiedCart)
+}
 /**
  * INITIAL STATE
  */
-const defaultCart = [] // {
+const defaultCart = deSerializeCart(localStorage.getItem('GScart')) || [] // {
 //   id: 1,
 //   name: 'test product',
 //   price: '12.99',
@@ -69,13 +76,6 @@ export const editItemQuanityAction = (product, quantity) => ({
 //Where do we put this logic?
 /// [{id,  orderDetail.quantity}, {id, orderDetail.quanity} ]
 /// "id:quanty,id2:quantity2"
-const serializeCart = cart => {
-  return JSON.stringify(cart)
-}
-
-const deSerializeCart = stringifiedCart => {
-  return JSON.parse(stringifiedCart)
-}
 
 export const addToCartLoggedInThunk = (product, userId) => {
   return async dispatch => {
@@ -97,15 +97,35 @@ export const addToCartGuestThunk = product => {
       cart = []
     }
     const newCart = [...cart, product]
-    if (newCart[newCart.length - 1].orderDetail) {
-      newCart[newCart.length - 1].orderDetail.quantity++
-    } else {
-      newCart[newCart.length - 1].orderDetail = {
-        quantity: 1
-      }
-    }
+    // if (newCart[newCart.length - 1].orderDetail) {
+    //   newCart[newCart.length - 1].orderDetail.quantity++
+    // } else {
+    //   newCart[newCart.length - 1].orderDetail = {
+    //     quantity: 1
+    //   }
+    // }
     localStorage.setItem('GScart', serializeCart(newCart))
     dispatch(addCartAction(product))
+  }
+}
+
+export const deleteCartItemGuestThunk = product => {
+  return dispatch => {
+    let cart = deSerializeCart(localStorage.getItem('GScart'))
+    const newCart = cart.filter(productObj => productObj.id !== product.id)
+    localStorage.setItem('GScart', serializeCart(newCart))
+    dispatch(deleteCartItemAction(product))
+  }
+}
+
+export const deleteCartItemLoggedInThunk = (product, orderId) => {
+  return async dispatch => {
+    try {
+      await axios.delete(`api/orders/${orderId}/cart/delete/${product.id}`)
+      dispatch(deleteCartItemAction(product))
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
 
