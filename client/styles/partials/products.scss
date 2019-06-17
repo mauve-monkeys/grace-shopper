@@ -1,0 +1,10 @@
+$product-img-width: 150px;
+$product-img-height: 250px;
+
+.product-tile {
+  img {
+    width: $product-img-width;
+    height: $product-img-height;
+    object-fit: cover;
+  }
+}
