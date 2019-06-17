@@ -1,8 +1,7 @@
 import React from 'react'
-import {getProductDetailsThunk} from '../store/products'
+import {getProductDetailsThunk, resetLoading} from '../store/products'
 import {connect} from 'react-redux'
-import AddCartButton from './add-cart-button'
-import {CartView} from '.'
+import {Loading, AddCartButton} from '.'
 
 class DisconnectedProductDetails extends React.Component {
   constructor() {
@@ -16,9 +15,14 @@ class DisconnectedProductDetails extends React.Component {
       console.log(error)
     }
   }
+
+  componentWillUnmount() {
+    this.props.resetLoading('selected')
+  }
+
   render() {
-    if (!this.props.selected) {
-      return <div>Loading...</div>
+    if (this.props.loading) {
+      return <Loading />
     }
     const selected = this.props.selected
     return (
@@ -51,11 +55,13 @@ class DisconnectedProductDetails extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  getProductDetails: id => dispatch(getProductDetailsThunk(id))
+  getProductDetails: id => dispatch(getProductDetailsThunk(id)),
+  resetLoading: which => dispatch(resetLoading(which))
 })
 
 const mapStateToProps = state => ({
-  selected: state.products.selected
+  selected: state.products.selected,
+  loading: state.products.loadingSelected
 })
 
 const ProductDetails = connect(mapStateToProps, mapDispatchToProps)(

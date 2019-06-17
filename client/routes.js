@@ -8,7 +8,8 @@ import {
   UserHome,
   AllProducts,
   ProductDetails,
-  CartView
+  CartView,
+  Loading
 } from './components'
 import {me} from './store'
 import {getCartUserThunk, getCartGuestThunk} from './store/cart'
@@ -43,6 +44,7 @@ class Routes extends Component {
         />
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/cart" component={CartView} />
+        <Route exact path="/loading" component={Loading} />
 
         {isLoggedIn && (
           <Switch>
