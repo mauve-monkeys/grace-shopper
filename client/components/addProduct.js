@@ -30,7 +30,7 @@ class AddProductForm extends React.Component {
         {
           id: 'imageUrl',
           name: 'Image Link',
-          required: false,
+          required: true,
           type: 'text'
         },
         {
@@ -38,6 +38,11 @@ class AddProductForm extends React.Component {
           name: 'Price',
           required: true,
           type: 'number'
+        },
+        {
+          id: 'SKU',
+          name: 'SKU',
+          required: true
         }
       ],
       onChangeHandler: this.onChangeHandler,
@@ -59,4 +64,8 @@ class AddProductForm extends React.Component {
   }
 }
 
-export default AddProductForm
+const mapStateToProps = state => ({
+  isAdmin: !!state.user.isAdmin
+})
+
+export default connect(mapStateToProps)(AddProductForm)
