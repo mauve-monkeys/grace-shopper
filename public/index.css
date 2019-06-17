@@ -38,6 +38,12 @@ form div {
   display: inline-block;
 }
 
+.product-tile img {
+  width: 150px;
+  height: 250px;
+  object-fit: cover;
+}
+
 /***************** ALL COLOR RELATED CSS *****************
 **********************************************************/
 #navbar {
