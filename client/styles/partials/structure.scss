@@ -13,6 +13,11 @@ $single-product-width: 320px;
   position: fixed;
   top: 0;
   height: $navbar-height;
+  nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
 
 /* 

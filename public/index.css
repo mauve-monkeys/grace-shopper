@@ -85,6 +85,11 @@ form div {
   top: 0;
   height: 150px;
 }
+#navbar nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
 /* 
   Make sure all the main content sections are not covered by the navbar

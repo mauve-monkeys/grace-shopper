@@ -9,22 +9,25 @@ const Navbar = ({handleClick, isLoggedIn}) => (
   <section id="navbar">
     <h1>BOILERMAKER</h1>
     <nav>
+      <span className="link-group">
+        <Link to="/products">Shop</Link>
+      </span>
       {isLoggedIn ? (
-        <div>
+        <span className="link-group">
           {/* The navbar will show these links after you log in */}
           <Link to="/home">Home</Link>
           <a href="#" onClick={handleClick}>
             Logout
           </a>
           <CartNavbar />
-        </div>
+        </span>
       ) : (
-        <div>
+        <span className="link-group">
           {/* The navbar will show these links before you log in */}
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
           <CartNavbar />
-        </div>
+        </span>
       )}
     </nav>
     <hr />
