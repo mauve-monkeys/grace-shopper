@@ -1,6 +1,7 @@
 import React from 'react'
 import Form from './form'
 import {connect} from 'react-redux'
+import {addProduct} from '../store/products'
 
 class AddProductForm extends React.Component {
   constructor() {
@@ -9,7 +10,8 @@ class AddProductForm extends React.Component {
       name: '',
       description: '',
       imageUrl: '',
-      price: ''
+      price: '',
+      SKU: ''
     }
     this.state = this.initialState
     this.formProps = {
@@ -46,7 +48,7 @@ class AddProductForm extends React.Component {
         }
       ],
       onChangeHandler: this.onChangeHandler,
-      onSubmitHandler: ''
+      onSubmitHandler: this.onSubmitHandler
     }
   }
   onChangeHandler = event => {
@@ -55,8 +57,10 @@ class AddProductForm extends React.Component {
     })
   }
 
-  onSubmitHandler = event => {
-    // do stuff
+  onSubmitHandler = () => {
+    this.props.addProduct(this.state)
+    this.setState(this.initialState)
+    this.props.history.push('/products')
   }
 
   render() {
@@ -68,4 +72,8 @@ const mapStateToProps = state => ({
   isAdmin: !!state.user.isAdmin
 })
 
-export default connect(mapStateToProps)(AddProductForm)
+const mapDispatchToProps = dispatch => ({
+  addProduct: product => dispatch(addProduct(product))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddProductForm)
