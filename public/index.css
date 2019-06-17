@@ -78,11 +78,15 @@ form div {
 
 .form-container {
   background-color: #fff;
-  border: #c0c0c0 solid 1px;
+  border: #cac7c7 solid 1px;
 }
 .form-container .warning {
   background-color: #fc8e8e;
   border: #f84d4d solid 2px;
+}
+
+.product-text {
+  color: #222;
 }
 
 #navbar {
@@ -304,4 +308,8 @@ main > * {
   font-style: italic;
   font-size: 12px;
   text-align: center;
+}
+
+.cart-nav i {
+  margin-right: 5px;
 }

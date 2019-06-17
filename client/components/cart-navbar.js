@@ -10,7 +10,7 @@ const CartNavbar = props => {
     cartNum = 0
   }
   return (
-    <Link to="/cart">
+    <Link to="/cart" className="cart-nav">
       <i className="fas fa-shopping-cart" />
       <span>{cartNum}</span>
     </Link>

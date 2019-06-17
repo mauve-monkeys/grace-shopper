@@ -30,13 +30,10 @@ class DisconnectedProductDetails extends React.Component {
         <h1 className="product-name">{selected.name}</h1>
         <img className="product-image" src={selected.imageUrl} />
         <div className="product-text">
-          <div className="product-description">
-            Description {selected.description}
-          </div>
-          <div className="product-price">Price ${selected.price}</div>
-          <div className="product-stone-tag">Stone {selected.stone}</div>
-          <div className="product-band-tag">Band {selected.band}</div>
-          <div className="product-SKU">Product # {selected.SKU}</div>
+          <div className="product-description">{selected.description}</div>
+          <div className="product-price">${selected.price}</div>
+          <div className="product-stone-tag">Stone: {selected.stone}</div>
+          <div className="product-band-tag">Band: {selected.band}</div>
           <label>
             Select Size:
             <select className="ring-select">
