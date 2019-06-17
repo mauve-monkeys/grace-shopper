@@ -27,3 +27,18 @@ router.get('/:id', async (req, res, next) => {
     next(error)
   }
 })
+
+router.put('/add', async (req, res, next) => {
+  try {
+    const product = await Product.create({
+      name: req.body.name,
+      description: req.body.description,
+      imageUrl: req.body.imageUrl,
+      price: req.body.price,
+      SKU: req.body.SKU
+    })
+    res.json(product)
+  } catch (err) {
+    next(err)
+  }
+})

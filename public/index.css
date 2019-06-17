@@ -64,6 +64,15 @@ form div {
   color: #929090;
 }
 
+.form-container {
+  background-color: #fff;
+  border: #c0c0c0 solid 1px;
+}
+.form-container .warning {
+  background-color: #fc8e8e;
+  border: #f84d4d solid 2px;
+}
+
 #navbar {
   margin: 0;
   width: 100vw;
@@ -81,6 +90,11 @@ form div {
   position: fixed;
   top: 0;
   height: 150px;
+}
+#navbar nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 /* 
@@ -119,6 +133,40 @@ main > * {
 #loading-spinner #loading-container {
   display: flex;
   justify-content: space-around;
+}
+
+.form-container {
+  padding: 5px 10px 10px 10px;
+}
+.form-container .form-title {
+  margin: 10px 0;
+}
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  min-width: 400px;
+}
+.form-container form .form-field-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 60px;
+  grid-template-rows: auto;
+  grid-row-gap: 5px;
+  align-items: center;
+}
+.form-container form .form-field-container .form-field {
+  margin: 5px;
+  grid-column: 1 / 2;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-column-gap: 10px;
+}
+.form-container form button {
+  margin: 5px 10px 5px 10px;
+}
+.form-container .warning {
+  grid-column: 2 / 3;
 }
 
 @keyframes bounce {
@@ -199,4 +247,23 @@ main > * {
   animation-duration: 3s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
+}
+
+/* 
+  Form Styles
+ */
+.form-container {
+  border-radius: 10px;
+}
+.form-container .form-title {
+  text-align: center;
+}
+.form-container label {
+  padding-right: 1em;
+}
+.form-container .warning {
+  border-radius: 5px;
+  font-style: italic;
+  font-size: 12px;
+  text-align: center;
 }

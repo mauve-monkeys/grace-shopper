@@ -60,6 +60,10 @@ const User = db.define('user', {
   },
   phoneNumber: {
     type: Sequelize.STRING
+  },
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 })
 
