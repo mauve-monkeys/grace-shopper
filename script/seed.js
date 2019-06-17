@@ -1,11 +1,11 @@
 'use strict'
 // const faker = require('faker')
 const db = require('../server/db')
-const Product = require('../server/db/models/product')
-const User = require('../server/db/models/user')
+// const Product = require('../server/db/models/product')
+// const User = require('../server/db/models/user')
 
-const products = [
-  Product.create({
+const productsData = [
+  {
     name: 'Sparkling Wishbone Ring',
     description:
       'Make all your wishes come true with this delicate Pandora ring, crafted from sterling silver and lined with sparkling cubic zirconia stones. Simple yet elegant, this wishbone-shaped ring can be worn on its own as a shimmering statement, or paired with other Pandora stackable rings to create a unique, highly individual look.',
@@ -16,8 +16,8 @@ const products = [
     stone: 'diamond',
     band: 'silver',
     size: '6'
-  }),
-  Product.create({
+  },
+  {
     name: 'Flower Crown Ring',
     description:
       'Decorate fingers with this dazzling ring in Pandora Rose. Shaped as a flower garland, the blush-pink design sparkles with clear stones. Stack with similar designs or wear solo as a subtle statement.',
@@ -28,8 +28,8 @@ const products = [
     stone: 'ruby',
     band: 'gold',
     size: '6'
-  }),
-  Product.create({
+  },
+  {
     name: 'Princess Tiara Ring',
     description:
       'Fit for a modern fairy tale, this PANDORA Shine™ ring in 18K gold-plated sterling silver boasts a tiara with a heart and a brilliant cubic zirconia stone. It will make you feel like a princess every day.',
@@ -40,8 +40,8 @@ const products = [
     stone: 'diamond',
     band: 'silver',
     size: '6'
-  }),
-  Product.create({
+  },
+  {
     name: 'Heart of Winter Ring,',
     description:
       'Declare your love for the winter season with this chic sterling silver statement ring. Its embellished heart design is abstract and delicate at the same time, thanks to its shimmering cubic zirconia ice ruby motif.',
@@ -51,8 +51,8 @@ const products = [
     stone: 'diamond',
     band: 'silver',
     size: '6'
-  }),
-  Product.create({
+  },
+  {
     name: 'Simple Band Ring',
     description:
       'Add a subtle touch of sparkle to every outfit with this Pandora eternity ring, crafted in polished Pandora Rose™ – a 14k rose gold-plated unique metal blend. Simple yet stylish, this classic style is embellished with shimmering cubic zirconia stones. Elegant on its own, it looks exceptional when stacked with other Pandora rings in contrasting metal tones.',
@@ -63,8 +63,8 @@ const products = [
     stone: 'diamond',
     band: 'gold',
     size: '6'
-  }),
-  Product.create({
+  },
+  {
     name: 'Regal Beauty Ring',
     description:
       'Perfect for stacking, the royal-inspired pattern on this PANDORA Rose™ ring is unique and sophisticated. It turns a classic band into an eye-catching essential.',
@@ -75,8 +75,8 @@ const products = [
     stone: 'ruby',
     band: 'gold',
     size: '6'
-  }),
-  Product.create({
+  },
+  {
     name: 'Radiant Teardrop Ring',
     description:
       'This ultra-glamorous statement ring in PANDORA Rose™ will cast glorious light on your fingers, courtesy of its beautiful teardrop-shaped cubic zirconia stone.',
@@ -87,8 +87,8 @@ const products = [
     stone: 'diamond',
     band: 'gold',
     size: '6'
-  }),
-  Product.create({
+  },
+  {
     name: 'Dazzling Droplet Ring',
     description:
       'Nothing less than absolutely dazzling, this sterling silver ring features pavé-set stones on a central dome. Reflecting the beautiful light effect of a water droplet, this striking ring looks best when stacked with the other rings in the Droplets series.',
@@ -99,8 +99,8 @@ const products = [
     stone: 'diamond',
     band: 'silver',
     size: '6'
-  }),
-  Product.create({
+  },
+  {
     name: ' Sparkling Red Heart Ring',
     description:
       "Set your heart on fire with this sparkling Pandora heart ring. Crafted in sterling silver, this stunning solitaire ring features a heart-shaped cubic zirconia stone in ruby red, flanked by two shimmering stones. A beautiful gift for Valentine's Day, birthdays, and anniversaries, it is the perfect expression of love. Let it shine solo or stack it with other Pandora rings.",
@@ -111,8 +111,8 @@ const products = [
     stone: 'ruby',
     band: 'silver',
     size: '6'
-  }),
-  Product.create({
+  },
+  {
     name: 'Sparkling Elegance Ring',
     description:
       'A trio of striking stones decorates this elegant ring in Pandora Rose. The blush-pink design has a vintage feel, and is perfect for wear alone or in ring stacks.',
@@ -123,8 +123,8 @@ const products = [
     stone: 'diamond',
     band: 'gold',
     size: '6'
-  }),
-  Product.create({
+  },
+  {
     name: 'Hearts of Pandora Ring',
     description:
       'Show that your love is forever with this classic Pandora Shine eternity ring in 18K gold-plated sterling silver. Its golden color, cut-out hearts and clear cubic zirconia stones make it a fabulous stacking ring.',
@@ -134,8 +134,8 @@ const products = [
     stone: 'diamond',
     band: 'gold',
     size: '6'
-  }),
-  Product.create({
+  },
+  {
     name: 'Twist Of Fate Stackable Ring',
     description:
       'Two rows of clear sparkling cubic zirconias entwine in this sterling silver ring, representing how your lives are connected. Beautiful alone and also stacked with your favorite PANDORA rings.',
@@ -146,11 +146,11 @@ const products = [
     stone: 'diamond',
     band: 'silver',
     size: '6'
-  })
+  }
 ]
 
-const users = [
-  User.create({
+const usersData = [
+  {
     username: 'cara.t',
     email: 'cara.t@gmail.com',
     password: 'kitty',
@@ -159,10 +159,10 @@ const users = [
     lastName: 'Takemoto',
     billingAddress: '123 terrace st, New York, NY 12345',
     shippingAddress: '123 terrace st, New York, NY 12345',
-    phoneNumber: '666'
-    // isAdmin: true
-  }),
-  User.create({
+    phoneNumber: '666',
+    isAdmin: true
+  },
+  {
     username: 'maddie.e',
     email: 'maddie.e@gmail.com',
     password: 'lab',
@@ -171,10 +171,10 @@ const users = [
     lastName: 'Emde',
     billingAddress: '6789 prince st, Orlando, FL 58364',
     shippingAddress: '6789 prince st, Orlando, FL 58364',
-    phoneNumber: '1275983023'
-    // isAdmin: true
-  }),
-  User.create({
+    phoneNumber: '1275983023',
+    isAdmin: true
+  },
+  {
     username: 'nikki.b',
     email: 'nikki.b@gmail.com',
     password: 'pitbull',
@@ -184,8 +184,8 @@ const users = [
     billingAddress: '235 grey st, Nevada, Las Vegas 3467',
     shippingAddress: '634 yellow st, Nevada, Las Vegas 2457',
     phoneNumber: ''
-  }),
-  User.create({
+  },
+  {
     username: 'kistina.g',
     email: 'kistina.g@gmail.com',
     password: 'goldendoddle',
@@ -195,45 +195,45 @@ const users = [
     billingAddress: '726 bowery drive, Palisades Park, NJ 2563',
     shippingAddress: '2353 canal st, Leonia, New Jersey 778',
     phoneNumber: ''
-  })
+  }
 ]
 
-// async function createOrders(num, products, users) {
-//   // const orders = await db.models.order.bulkCreate(new Array(num).fill({}))
-//   // let randInt = Math.floor(Math.random() * products.length)
-//   // await orders.addProduct(products[randInt])
-//   const order = await db.models.order.create({})
-//   await order.addProduct(products[0])
-//   await order.addProduct(products[1])
-//   await users[0].addOrder(order)
+async function createOrders(num, products, users) {
+  // const orders = await db.models.order.bulkCreate(new Array(num).fill({}))
+  // let randInt = Math.floor(Math.random() * products.length)
+  // await orders.addProduct(products[randInt])
+  const order = await db.models.order.create({})
+  await order.addProduct(products[0])
+  await order.addProduct(products[1])
+  await users[0].addOrder(order)
 
-//   const order2 = await db.models.order.create({
-//     status: 'confirmed'
-//   })
-//   await order2.addProduct(products[1])
-//   await order2.addProduct(products[2])
-//   await users[1].addOrder(order2)
-// }
+  const order2 = await db.models.order.create({
+    status: 'confirmed'
+  })
+  await order2.addProduct(products[1])
+  await order2.addProduct(products[2])
+  await users[1].addOrder(order2)
+}
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const usersData = []
+  const users = []
 
   for (let i = 0; i < usersData.length; i++) {
     let user = await db.models.user.create(usersData[i])
     users.push(user)
   }
 
-  const productsData = []
+  const products = []
 
   for (let i = 0; i < productsData.length; i++) {
     let product = await db.models.product.create(productsData[i])
     products.push(product)
   }
 
-  // await createOrders(2, products, users)
+  await createOrders(2, products, users)
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${products.length} products`)
