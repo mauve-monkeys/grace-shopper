@@ -31,7 +31,9 @@ const Order = db.define('order', {
 
 Order.prototype.addProductCustom = async function(product) {
   try {
+    console.log(product)
     const orderDetail = await this.addProduct(product)
+    console.log(orderDetail)
     this.total += product.dataValues.price * orderDetail[0].dataValues.quantity
     this.orderSize += orderDetail[0].dataValues.quantity
     await Order.update(
@@ -54,9 +56,14 @@ Order.prototype.addProductCustom = async function(product) {
 
 Order.prototype.removeProductCustom = async function(product) {
   try {
-    const orderDetail = await this.removeProduct(product)
-    this.total -= product.dataValues.price * orderDetail[0].dataValues.quantity
-    this.orderSize -= orderDetail[0].dataValues.quantity
+    const orderDetail = await this.getProduct(product)
+    await this.removeProduct(product)
+    console.log(orderDetail.dataValues, 'orderDetail')
+    this.total -= product.dataValues.price
+    console.log(this.total, 'post add')
+    // this.orderSize -= orderDetail.dataValues.quantity
+    console.log(this.orderSize, 'ordersize')
+
     await Order.update(
       {
         total: this.total,

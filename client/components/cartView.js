@@ -48,7 +48,10 @@ class CartView extends React.Component {
                   type="button"
                   onClick={() => {
                     if (this.props.isLoggedIn) {
-                      // this.props.deleteCartItemLoggedIn(product, 1)
+                      this.props.deleteCartItemLoggedIn(
+                        product,
+                        product.orderDetail.orderId
+                      )
                     } else {
                       this.props.deleteCartItemGuest(product)
                     }

@@ -13,9 +13,9 @@ const defaultState = [
 // ACTION CREATORS
 const getOrders = orders => ({type: GET_ORDERS, orders})
 
-export const getOrdersThunk = () => async dispatch => {
+export const getOrdersThunk = userId => async dispatch => {
   try {
-    const {data} = await axios.get('CREATE BACKEND API ROUTE HERE!!!')
+    const {data} = await axios.get(`api/orders/${userId}/cart`)
     dispatch(getOrders(data))
   } catch (error) {
     console.log(error)

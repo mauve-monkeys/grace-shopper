@@ -121,7 +121,7 @@ export const deleteCartItemGuestThunk = product => {
 export const deleteCartItemLoggedInThunk = (product, orderId) => {
   return async dispatch => {
     try {
-      await axios.delete(`api/orders/${orderId}/cart/delete/${product.id}`)
+      await axios.put(`api/orders/${orderId}/cart/delete/${product.id}`)
       dispatch(deleteCartItemAction(product))
     } catch (error) {
       console.error(error)
