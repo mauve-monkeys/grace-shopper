@@ -6,7 +6,7 @@ module.exports = router
 
 router.get('/:userId/cart', async (req, res, next) => {
   try {
-    const cart = await Order.findOrCreate({
+    const [cart, wasCreated] = await Order.findOrCreate({
       where: {
         userId: +req.params.userId,
         status: 'pending'
