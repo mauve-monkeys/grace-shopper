@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*
 Make all elements border-box, so specified width & height are
 not affected by padding and border
@@ -15,7 +16,7 @@ html {
 }
 
 body {
-  font-family: sans-serif;
+  font-family: ‘Open Sans Condensed’, sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -42,6 +43,17 @@ form div {
   width: 150px;
   height: 250px;
   object-fit: cover;
+}
+
+.product-image {
+  width: 300px;
+  height: 400px;
+  object-fit: cover;
+}
+
+.product-name {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 /***************** ALL COLOR RELATED CSS *****************
@@ -81,6 +93,7 @@ form div {
 #navbar h1 {
   margin: 10px auto;
   text-align: center;
+  font-size: 32px;
 }
 
 /************ ALL PAGE STRUCTURE RELATED CSS *************
@@ -89,7 +102,7 @@ form div {
 #navbar {
   position: fixed;
   top: 0;
-  height: 150px;
+  height: 130px;
 }
 #navbar nav {
   display: flex;
@@ -106,10 +119,10 @@ main {
   flex-direction: column;
   justify-content: flex-start;
   /* account for nav height */
-  height: calc(100vh - 150px);
+  height: calc(100vh - 130px);
 }
 main > * {
-  margin: calc(150px + 20px) 20px 20px 20px;
+  margin: calc(130px + 20px) 20px 20px 20px;
 }
 
 #all-products {
@@ -167,6 +180,31 @@ main > * {
 }
 .form-container .warning {
   grid-column: 2 / 3;
+}
+
+#product-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr 20px 1fr 1fr 1fr;
+  grid-template-rows: 50px 1fr 1fr 1fr 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+}
+#product-details .product-name {
+  grid-area: 1 / 1 / 2 / 3;
+}
+#product-details .product-image {
+  grid-area: 2 / 1 / 6 / 3;
+  justify-self: center;
+}
+#product-details .product-text {
+  grid-area: 2 / 4 / 5 / 7;
+  align-self: center;
+}
+#product-details .product-text > * {
+  margin: 10px 0;
+}
+#product-details .cart-button {
+  grid-area: 5 / 5 / 6 / 6;
 }
 
 @keyframes bounce {

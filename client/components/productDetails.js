@@ -27,9 +27,9 @@ class DisconnectedProductDetails extends React.Component {
     const selected = this.props.selected
     return (
       <section id="product-details">
-        <h1>{selected.name}</h1>
+        <h1 className="product-name">{selected.name}</h1>
         <img className="product-image" src={selected.imageUrl} />
-        <div>
+        <div className="product-text">
           <div className="product-description">
             Description {selected.description}
           </div>
@@ -37,17 +37,18 @@ class DisconnectedProductDetails extends React.Component {
           <div className="product-stone-tag">Stone {selected.stone}</div>
           <div className="product-band-tag">Band {selected.band}</div>
           <div className="product-SKU">Product # {selected.SKU}</div>
+          <label>
+            Select Size:
+            <select className="ring-select">
+              <option value="4">4</option>
+              <option value="4">5</option>
+              <option value="4">6</option>
+              <option value="4">7</option>
+              <option value="4">8</option>
+            </select>
+          </label>
         </div>
-        <label>
-          Select Size:
-          <select>
-            <option value="4">4</option>
-            <option value="4">5</option>
-            <option value="4">6</option>
-            <option value="4">7</option>
-            <option value="4">8</option>
-          </select>
-        </label>
+
         <AddCartButton />
       </section>
     )

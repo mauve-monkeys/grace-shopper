@@ -3,10 +3,11 @@
 **********************************************************/
 
 // ------ Variables ------
-$navbar-height: 150px;
+$navbar-height: 130px;
 $header-height: 35px;
 $single-product-height: 300px;
 $single-product-width: 320px;
+$product-details-header: 50px;
 
 // -- Navbar --
 #navbar {
@@ -102,5 +103,38 @@ main {
   }
   .warning {
     grid-column: 2 / 3;
+  }
+}
+
+// product details: when you go into a single product page
+#product-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr 20px 1fr 1fr 1fr;
+
+  grid-template-rows: $product-details-header 1fr 1fr 1fr 1fr;
+
+  grid-column-gap: 10px;
+
+  grid-row-gap: 10px;
+
+  .product-name {
+    grid-area: 1 / 1 / 2 / 3;
+  }
+
+  .product-image {
+    grid-area: 2 / 1 / 6 / 3;
+    justify-self: center;
+  }
+
+  .product-text {
+    grid-area: 2 / 4 / 5 / 7;
+    align-self: center;
+    > * {
+      margin: 10px 0;
+    }
+  }
+
+  .cart-button {
+    grid-area: 5 / 5 / 6 / 6;
   }
 }
