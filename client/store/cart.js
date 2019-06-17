@@ -8,6 +8,7 @@ const GET_CART = 'GET_CART'
 const ADD_TO_CART = 'ADD_TO_CART'
 const DELETE_CART_ITEM = 'DELETE_CART_ITEM'
 const EDIT_QUANTITY = 'EDIT_QUANTITY'
+const SUBMIT_CHECKOUT = 'SUBMIT_CHECKOUT'
 
 const serializeCart = cart => {
   return JSON.stringify(cart)
@@ -69,6 +70,10 @@ export const editItemQuanityAction = (product, quantity) => ({
   }
 })
 
+export const submitCheckoutAction = () => ({
+  type: SUBMIT_CHECKOUT
+})
+
 /**
  * THUNK CREATORS
  */
@@ -105,6 +110,7 @@ export const addToCartGuestThunk = product => {
     //   }
     // }
     localStorage.setItem('GScart', serializeCart(newCart))
+
     dispatch(addCartAction(product))
   }
 }
@@ -152,6 +158,18 @@ export const getCartUserThunk = userId => {
   }
 }
 
+export const submitCheckoutLoggedInThunk = userId => {
+  return async dispatch => {
+    try {
+      await axios.put(`/api/orders/cart/submit/${userId}`)
+      localStorage.setItem('GScart', '')
+      dispatch(submitCheckoutAction())
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
 /**
  * REDUCER
  */
@@ -174,6 +192,8 @@ export default function(state = defaultCart, action) {
         ),
         action.product
       ]
+    case SUBMIT_CHECKOUT:
+      return defaultCart
     default:
       return state
   }

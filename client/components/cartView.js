@@ -6,9 +6,12 @@ import {
   getCartUserThunk,
   getCartGuestThunk,
   deleteCartItemGuestThunk,
-  deleteCartItemLoggedInThunk
+  deleteCartItemLoggedInThunk,
+  submitCheckoutLoggedInThunk,
+  submitCheckoutAction
 } from '../store/cart'
-import SingleProduct from './singleProduct'
+import CartEmpty from './cartEmpty'
+import CartFull from './cartFull'
 
 class CartView extends React.Component {
   // componentDidMount() {
@@ -25,43 +28,17 @@ class CartView extends React.Component {
     return (
       <div className="main-content">
         {this.props.cart === null || this.props.cart.length === 0 ? (
-          <div>Your cart is empty</div>
+          <CartEmpty />
         ) : (
-          this.props.cart.map(product => {
-            return (
-              <div key={product.id}>
-                <SingleProduct product={product} />
-                {/* <p>Quantity: {product.orderDetail.quantity}</p> */}
-                {/* <select
-                  name="quanity"
-                  onChange={event =>
-                    this.props.editQuantity(product, event.target.value)
-                  }
-                >
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select> */}
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (this.props.isLoggedIn) {
-                      this.props.deleteCartItemLoggedIn(
-                        product,
-                        product.orderDetail.orderId
-                      )
-                    } else {
-                      this.props.deleteCartItemGuest(product)
-                    }
-                  }}
-                >
-                  Delete
-                </button>
-              </div>
-            )
-          })
+          <CartFull
+            cart={this.props.cart}
+            isLoggedIn={this.props.isLoggedIn}
+            deleteCartItemLoggedIn={this.props.deleteCartItemLoggedIn}
+            deleteCartItemGuest={this.props.deleteCartItemGuest}
+            submitCheckoutLoggedIn={this.props.submitCheckoutLoggedIn}
+            submitCheckoutGuest={this.props.submitCheckoutGuest}
+            user={this.props.user}
+          />
         )}
       </div>
     )
@@ -80,7 +57,10 @@ const mapDispatch = dispatch => ({
   getCartGuest: () => dispatch(getCartGuestThunk()),
   deleteCartItemGuest: product => dispatch(deleteCartItemGuestThunk(product)),
   deleteCartItemLoggedIn: (product, orderId) =>
-    dispatch(deleteCartItemLoggedInThunk(product, orderId))
+    dispatch(deleteCartItemLoggedInThunk(product, orderId)),
+  submitCheckoutLoggedIn: userId =>
+    dispatch(submitCheckoutLoggedInThunk(userId)),
+  submitCheckoutGuest: () => dispatch(submitCheckoutAction())
 })
 
 export default connect(mapState, mapDispatch)(CartView)

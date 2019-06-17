@@ -54,7 +54,6 @@ router.put('/:userId/cart/add', async (req, res, next) => {
         status: 'pending'
       }
     })
-
     const product = await Product.findOne({
       where: {
         id: +req.body.productId
@@ -85,25 +84,29 @@ router.put('/:orderId/cart/delete/:productId', async (req, res, next) => {
   }
 })
 
-// export const deleteStudentThunk = id => {
-//   return async dispatch => {
-//     try {
-//       await axios.delete(`api/students/${id}`);
-//       dispatch(deleteSingleStudent(id));
-//     } catch (error) {
-//       console.log("ERROR", error);
-//     }
-//   };
-//  };
-//  router.delete("/campuses/:id", (req, res, next) => {
-//   try {
-//     Campus.destroy({
-//       where: {
-//         id: req.params.id
-//       }
-//     });
-//     res.send("submitted");
-//   } catch (error) {
-//     console.log("ERROR", error);
-//   }
-//  });
+router.put('/cart/submit/guest', async (req, res, next) => {
+  try {
+    //tbd
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/cart/submit/:userId', async (req, res, next) => {
+  try {
+    const order = await Order.findOne({
+      where: {
+        userId: +req.params.userId,
+        status: 'pending'
+      }
+    })
+
+    order.status = 'confirmed'
+
+    await order.save()
+
+    res.status(201).send(order)
+  } catch (err) {
+    next(err)
+  }
+})
