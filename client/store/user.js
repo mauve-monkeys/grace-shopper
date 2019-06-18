@@ -6,17 +6,31 @@ import history from '../history'
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
+const GET_USER_DETAILS = 'GET_USER_DETAILS'
+const UPDATE_USER_DETAILS = 'UPDATE_USER_DETAILS'
 
 /**
  * INITIAL STATE
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
  */
-const defaultUser = {}
+const defaultUser = {
+  selected: []
+}
 
 /**
  * ACTION CREATORS
  */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
+const getUserDetails = userId => ({type: GET_USER_DETAILS})
+const updateUserDetails = user => ({type: UPDATE_USER_DETAILS, user})
 
 /**
  * THUNK CREATORS
@@ -40,7 +54,7 @@ export const auth = (email, password, method) => async dispatch => {
 
   try {
     dispatch(getUser(res.data))
-    history.push('/home')
+    history.push('/')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
   }
@@ -56,6 +70,32 @@ export const logout = () => async dispatch => {
   }
 }
 
+export const getUserDetailsThunk = id => async dispatch => {
+  try {
+    const {data} = await axios.get(`/api/users/${id}`)
+    dispatch(getUserDetails(data))
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const updateUserDetailsThunk = (userId, values) => async dispatch => {
+  try {
+    console.log('update user thunk!!!')
+    await axios.put(`/api/users/${userId}/edit`, {
+      username: values.username,
+      firstName: values.firstName,
+      lastName: values.lastName,
+      shippingAddress: values.shippingAddress,
+      billingAddress: values.billingAddress
+    })
+    const {data} = await axios.get(`/api/users/${userId}/edit`)
+    dispatch(updateUserDetails(data))
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 /**
  * REDUCER
  */
@@ -65,6 +105,11 @@ export default function(state = defaultUser, action) {
       return action.user
     case REMOVE_USER:
       return defaultUser
+    case GET_USER_DETAILS:
+      return {
+        ...state,
+        selected: action.user
+      }
     default:
       return state
   }

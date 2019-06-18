@@ -15,3 +15,40 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/:userId', async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      where: {
+        id: req.params.userId
+      }
+    })
+    res.json(user)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.put('/:userId/edit', async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      where: {
+        id: req.params.userId
+      }
+    })
+    await user.update(
+      {
+        username: req.body.username,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        shippingAddress: req.body.shippingAddress,
+        billingAddress: req.body.billingAddress
+      }
+      // {
+      //   where: {id: req.params.userId}
+      // }
+    )
+  } catch (error) {
+    next(error)
+  }
+})

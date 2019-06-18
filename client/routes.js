@@ -2,29 +2,61 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome} from './components'
+import {
+  Login,
+  Signup,
+  UserHome,
+  AllProducts,
+  ProductDetails,
+  CartView,
+  Loading,
+  AddProductForm,
+  Welcome
+} from './components'
 import {me} from './store'
+import {getCartUserThunk, getCartGuestThunk} from './store/cart'
 
 /**
  * COMPONENT
  */
 class Routes extends Component {
   componentDidMount() {
-    this.props.loadInitialData()
+    this.props.getUser()
+  }
+
+  componentDidUpdate() {
+    const getCart = this.props.user.id
+      ? this.props.getCartUser
+      : this.props.getCartGuest
+
+    getCart(this.props.user.id)
   }
 
   render() {
-    const {isLoggedIn} = this.props
+    const {isLoggedIn, isAdmin} = this.props
 
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
+        <Route exact path="/" component={Welcome} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route
+          path="/products/:id"
+          render={props => <ProductDetails {...props} />}
+        />
+        <Route exact path="/products" component={AllProducts} />
+        <Route exact path="/cart" component={CartView} />
+        <Route exact path="/loading" component={Loading} />
+
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
+            <Route path="/myaccount" component={UserHome} />
+            {isAdmin && (
+              /* Routes placed here are only available as an admin */
+              <Route path="/add-product" component={AddProductForm} />
+            )}
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
@@ -41,15 +73,17 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    user: state.user,
+    isAdmin: !!state.user.isAdmin
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    loadInitialData() {
-      dispatch(me())
-    }
+    getUser: () => dispatch(me()),
+    getCartUser: id => dispatch(getCartUserThunk(id)),
+    getCartGuest: () => dispatch(getCartGuestThunk())
   }
 }
 
@@ -61,6 +95,6 @@ export default withRouter(connect(mapState, mapDispatch)(Routes))
  * PROP TYPES
  */
 Routes.propTypes = {
-  loadInitialData: PropTypes.func.isRequired,
+  getUser: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired
 }

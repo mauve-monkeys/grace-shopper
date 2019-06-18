@@ -1,29 +1,23 @@
 language: node_js
 node_js:
-  - node # uses most recent stable node version
+- node
 services:
-  - postgresql # starts up postgres
+- postgresql
 addons:
-  postgresql: '9.6' # highest available postgres version on Travis
-dist: trusty # uses trusty environment
-sudo: false # when on trusty, uses Docker containers for speed
+  postgresql: '9.6'
+dist: trusty
+sudo: false
 notifications:
   email:
-    on_success: change # default: change (only when going from broken to fixed)
-    on_failure: always # default: always (which is annoying, as it should be)
+    on_success: change
+    on_failure: always
 install:
-  - npm ci # faster, goes only from package-lock
+- npm ci
 before_script:
-  - psql -c 'create database "grace-shopper-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
+- psql -c 'create database "grace-shopper-test";' -U postgres
 script:
-  - npm test # test the code
-  - npm run build-client # make the bundle
-
-# before_deploy:
-#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
-# deploy:
-#   skip_cleanup: true # prevents travis from deleting the build
-#   provider: heroku
-#   app: YOUR-HEROKU-APP-NAME-HERE # see README
-#   api_key:
-#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+- npm test
+- npm run build-client
+deploy:
+  api_key​:
+    secure: WF0kDHySrQlLiqknKGypIdPoBieEU/LKtnFCGuwSy8KNXnXT2MemwAHhlnD8Y6/shH62ZzzE6mM5xKjQcwWa9fckc+iQo7dgQ9inFREZNqhYDGOvPZ0baLxIC1TbXZwSuWf+wi8kSvRo0wNKwXfjSgHQPhm63QqC9034r1VOE+0CL31ieQdZvprmaM+0FfXLnPW4+MdbmDjWWehlSfZRydXsoAFI1PuVZad65FVShEBNwMcHPcMJ6A0IOKoTePujL7089/yaP6Xno/pUabycJAdMnCzWgdcxvnUMJ+2dIdp69cLnnkMObGRg3ZnFs4WGCm3jD9MqXI5QjW4UEqWEV/zagX2ymvgNz0L3O5msqGDcMHmRhFpqCiDjGDNgCY4BF1p89XjxFioUeA6qWl/oyoaotd5CTLD+DZ6ICUXshU3f9QJfHG4JvE0DDL/xnqgxs+/tWGBc78jLpcyQLM233kC0e/CS1ux3ygjjKzrcBDgNARmHqX1rM9aVTsCKZamYpxIz12fgKc58rAHxGIUXUqlptyosgiPI46Bxed3vQfMakxCGMqlB2RAJNTJaKQFOhW2Jf5khbcpxLf+z3JJX3EcYQUN51Bvm39qjGCXP7TrDmIQpv8W/Vv5FJpzYNPmkFmyurY69lfpuiMoydmCD77qU8dtCyj+tm5cW+1RUENc=

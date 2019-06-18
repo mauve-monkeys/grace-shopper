@@ -1,0 +1,411 @@
+/*
+Make all elements border-box, so specified width & height are
+not affected by padding and border
+*/
+html {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  box-sizing: inherit;
+}
+
+body {
+  font-family: 'Open Sans Condensed', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+label {
+  display: block;
+}
+
+nav a {
+  display: inline-block;
+  margin: 1em;
+}
+
+form div {
+  margin: 1em;
+  display: inline-block;
+}
+
+button {
+  margin: 5px;
+}
+
+.product-price {
+  font-style: italic;
+}
+
+.product-tile img {
+  width: 150px;
+  height: 250px;
+  object-fit: cover;
+}
+
+.product-tile .product-name,
+.product-tile .product-price {
+  margin: 5px;
+}
+
+.product-tile a:hover {
+  text-decoration: underline;
+}
+
+#product-details .product-image {
+  width: 300px;
+  height: 400px;
+  object-fit: cover;
+}
+
+#product-details .product-name {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/***************** ALL COLOR RELATED CSS *****************
+**********************************************************/
+button {
+  background-color: #dddcdc;
+  color: #222;
+}
+
+button:hover {
+  background-color: #9d8ceb;
+}
+
+#navbar {
+  background-color: #fff;
+  color: #222;
+  border-bottom: #222 solid 1px;
+}
+#navbar a {
+  color: #222;
+}
+#navbar a:visited {
+  color: #555454;
+}
+#navbar a:hover {
+  color: #9d8ceb;
+}
+
+#footer {
+  background-color: #f5bdd7;
+  color: #555454;
+}
+
+.loading-text {
+  color: #969696;
+}
+
+.form-container {
+  background-color: #fff;
+  border: #dddcdc solid 1px;
+}
+.form-container .warning {
+  background-color: #fc8e8e;
+  border: #f84d4d solid 2px;
+}
+
+.product-price {
+  color: #969696;
+}
+
+.product-tile a {
+  color: #222;
+}
+
+.product-text {
+  color: #222;
+}
+
+.welcome-page > div {
+  background-color: #fff;
+}
+
+#navbar {
+  margin: 0;
+  width: 100vw;
+  padding: 10px;
+}
+#navbar h1 {
+  margin: 10px auto;
+  text-align: center;
+  font-size: 32px;
+  font-family: 'Lobster', cursive;
+}
+
+/************ ALL PAGE STRUCTURE RELATED CSS *************
+  Anything related to position/grid/flexbox go here
+**********************************************************/
+#navbar {
+  position: fixed;
+  top: 0;
+  height: 130px;
+}
+#navbar nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/* 
+  Make sure all the main content sections are not covered by the navbar
+*/
+main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* account for nav height */
+  height: calc(100vh - 130px);
+}
+main > * {
+  margin: calc(130px + 20px) 20px 20px 20px;
+  padding-bottom: 60px;
+}
+
+.welcome-page {
+  width: 100vw;
+  position: relative;
+}
+.welcome-page img {
+  width: 100%;
+  height: 400px;
+}
+.welcome-page > div {
+  min-height: 150px;
+  position: absolute;
+  top: calc((200px) - (150px / 2));
+  right: calc(50vw / 2);
+  width: 50vw;
+}
+
+.product-tile img,
+.product-tile > div {
+  margin: 5px;
+}
+
+#all-products {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
+#all-products > * {
+  margin: 20px;
+}
+#all-products h1 {
+  height: 35px;
+  flex: 1 100%;
+}
+
+#loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+#loading-spinner #loading-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.form-container {
+  padding: 5px 20px 10px 10px;
+}
+.form-container .form-title {
+  margin: 10px 0;
+}
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  min-width: 450px;
+}
+.form-container form .form-field-container {
+  width: 100%;
+  margin: 10px;
+  display: grid;
+  grid-template-columns: auto 60px;
+  grid-template-rows: auto;
+  grid-row-gap: 5px;
+  align-items: center;
+}
+.form-container form .form-field-container .form-field {
+  margin: 5px;
+  grid-column: 1 / 2;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-column-gap: 10px;
+}
+.form-container form button {
+  margin: 5px 10px 5px 10px;
+}
+.form-container .warning {
+  grid-column: 2 / 3;
+}
+
+#product-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr 20px 1fr 1fr 1fr;
+  grid-template-rows: 50px 1fr 1fr 1fr 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+}
+#product-details .product-name {
+  grid-area: 1 / 1 / 2 / 3;
+}
+#product-details .product-image {
+  grid-area: 2 / 1 / 6 / 3;
+  justify-self: center;
+}
+#product-details .product-text {
+  grid-area: 2 / 4 / 5 / 7;
+  align-self: center;
+}
+#product-details .product-text > * {
+  margin: 10px 0;
+}
+#product-details .cart-button {
+  grid-area: 5 / 5 / 6 / 6;
+}
+
+.cart-view #cart-items {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
+
+.cart-view button {
+  margin-top: 10px;
+}
+
+#footer {
+  width: 100vw;
+  height: 60px;
+  position: fixed;
+  bottom: 0;
+}
+
+@keyframes bounce {
+  0% {
+    bottom: calc(100px * -1);
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+  }
+  100% {
+    bottom: 0;
+    box-shadow: 0 50px 50px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@keyframes loading-text {
+  0% {
+    content: 'Loading';
+  }
+  25% {
+    content: 'Loading.';
+  }
+  50% {
+    content: 'Loading..';
+  }
+  75% {
+    content: 'Loading...';
+  }
+}
+
+#loading-container {
+  height: calc(100px + 20px);
+  width: 200px;
+  align-content: center;
+  margin: 20px 10px;
+}
+
+.loading-ball {
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  position: relative;
+  animation-name: bounce;
+  animation-duration: 0.4s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-fill-mode: both;
+}
+
+.loading-ball:nth-child(1) {
+  background-color: #71afe9e3;
+  animation-delay: 0s;
+}
+
+.loading-ball:nth-child(2) {
+  background-color: rgba(111, 226, 121, 0.993);
+  animation-delay: 0.2s;
+}
+
+.loading-ball:nth-child(3) {
+  background-color: #e3f34e;
+  animation-delay: 0.4s;
+}
+
+.loading-ball:nth-child(4) {
+  background-color: #cb6ce7;
+  animation-delay: 0.6s;
+}
+
+.loading-text {
+  position: relative;
+  left: calc((200px / 2) - 20px);
+}
+
+.loading-text::after {
+  content: 'Loading';
+  font-style: italic;
+  animation-name: loading-text;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* 
+  Form Styles
+ */
+.form-container {
+  border-radius: 10px;
+}
+.form-container .form-title {
+  text-align: center;
+}
+.form-container .warning {
+  border-radius: 5px;
+  font-style: italic;
+  font-size: 12px;
+  text-align: center;
+}
+
+.cart-nav i {
+  margin-right: 5px;
+}
+
+.welcome-page img {
+  object-fit: cover;
+}
+
+.welcome-page > div {
+  text-align: center;
+  padding: 10px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+}
+
+#footer {
+  text-align: center;
+  padding: 10px;
+}
