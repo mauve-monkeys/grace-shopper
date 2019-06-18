@@ -6,10 +6,11 @@ const SingleOrder = props => {
 
   return (
     // className="order-tile"
-    <tr>
+    <tr key={order.id}>
       <td>{order.id}</td>
       <td>{order.updatedAt}</td>
       <td>{order.total}</td>
+      <td>{order.status}</td>
     </tr>
   )
 }

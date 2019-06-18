@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import {runInNewContext} from 'vm'
 
 //  ACTION TYPES
 const GET_ORDERS = 'GET_ORDERS'
@@ -13,10 +14,12 @@ const defaultState = [
 // ACTION CREATORS
 const getOrders = orders => ({type: GET_ORDERS, orders})
 
-export const getOrdersThunk = () => async dispatch => {
+export const getOrdersThunk = userId => async dispatch => {
   try {
-    const {data} = await axios.get('CREATE BACKEND API ROUTE HERE!!!')
-    dispatch(getOrders(data))
+    const {data} = await axios.get(`/api/orders/${userId}/cart`)
+    if (data) {
+      dispatch(getOrders(data))
+    }
   } catch (error) {
     console.log(error)
   }
