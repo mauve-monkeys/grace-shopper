@@ -175,9 +175,14 @@ main {
 }
 
 .cart-view {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-start;
+  #cart-items {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+  }
+  button {
+    margin-top: 10px;
+  }
 }
 
 // -- Footer --

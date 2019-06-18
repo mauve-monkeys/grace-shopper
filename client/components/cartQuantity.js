@@ -10,7 +10,7 @@ const CartQuantity = props => {
   return (
     <div>
       <p>
-        Quantity:
+        Quantity:{' '}
         <select
           name="quantity"
           value={quantity}
