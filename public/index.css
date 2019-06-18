@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /*
 Make all elements border-box, so specified width & height are
 not affected by padding and border
@@ -16,7 +15,7 @@ html {
 }
 
 body {
-  font-family: ‘Open Sans Condensed’, sans-serif;
+  font-family: 'Open Sans Condensed', sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -45,13 +44,17 @@ form div {
   object-fit: cover;
 }
 
-.product-image {
+.product-tile .product-price {
+  font-style: italic;
+}
+
+#product-details .product-image {
   width: 300px;
   height: 400px;
   object-fit: cover;
 }
 
-.product-name {
+#product-details .product-name {
   text-align: center;
   margin-bottom: 20px;
 }
@@ -59,14 +62,15 @@ form div {
 /***************** ALL COLOR RELATED CSS *****************
 **********************************************************/
 #navbar {
-  background-color: #222;
-  color: #fff;
+  background-color: #fff;
+  color: #222;
+  border-bottom: #222 solid 1px;
 }
 #navbar a {
-  color: #fff;
+  color: #222;
 }
 #navbar a:visited {
-  color: #cac7c7;
+  color: #555454;
 }
 #navbar a:hover {
   color: #9d8ceb;
@@ -85,8 +89,20 @@ form div {
   border: #f84d4d solid 2px;
 }
 
+.product-title a {
+  color: #222;
+}
+
+.product-title .product-price a {
+  color: #929090;
+}
+
 .product-text {
   color: #222;
+}
+
+.welcome-page > div {
+  background-color: #fff;
 }
 
 #navbar {
@@ -98,6 +114,7 @@ form div {
   margin: 10px auto;
   text-align: center;
   font-size: 32px;
+  font-family: 'Lobster', cursive;
 }
 
 /************ ALL PAGE STRUCTURE RELATED CSS *************
@@ -129,13 +146,18 @@ main > * {
   margin: calc(130px + 20px) 20px 20px 20px;
 }
 
+.product-tile img,
+.product-tile > div {
+  margin: 5px;
+}
+
 #all-products {
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
 }
-#all-products * {
-  margin: 10px;
+#all-products > * {
+  margin: 20px;
 }
 #all-products h1 {
   height: 35px;
@@ -209,6 +231,12 @@ main > * {
 }
 #product-details .cart-button {
   grid-area: 5 / 5 / 6 / 6;
+}
+
+.cart-view {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
 }
 
 @keyframes bounce {
@@ -312,4 +340,21 @@ main > * {
 
 .cart-nav i {
   margin-right: 5px;
+}
+
+.welcome-page {
+  width: 100vw;
+  margin-top: 10px;
+}
+.welcome-page img {
+  width: 100%;
+}
+.welcome-page > div {
+  position: relative;
+  top: -300px;
+  width: 60vw;
+  margin: 0 auto;
+  text-align: center;
+  padding: 10px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
 }

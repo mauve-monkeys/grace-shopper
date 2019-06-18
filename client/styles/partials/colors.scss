@@ -4,13 +4,17 @@
 // ------ Color Variables ------
 $very-light-grey: #cac7c7;
 $light-grey: rgb(146, 144, 144);
+$dark-grey: rgb(85, 84, 84);
 $very-dark-grey: #222;
 
-$navbar-bg-color: $very-dark-grey;
-$navbar-txt-color: #fff;
-$navbar-link-color: #fff;
-$navbar-link-visited: $very-light-grey;
+$background-color: #fff;
+
+$navbar-bg-color: $background-color;
+$navbar-txt-color: $very-dark-grey;
+$navbar-link-color: $very-dark-grey;
+$navbar-link-visited: $dark-grey;
 $navbar-link-hover: rgb(157, 140, 235);
+$navbar-border: $very-dark-grey;
 
 $loading-spinner-text: $light-grey;
 $loading-ball-color1: #71afe9e3;
@@ -18,7 +22,7 @@ $loading-ball-color2: rgba(111, 226, 121, 0.993);
 $loading-ball-color3: #e3f34e;
 $loading-ball-color4: #cb6ce7;
 
-$form-background: #fff;
+$form-background: $background-color;
 $form-border: $very-light-grey;
 $form-warning-bg: #fc8e8e;
 $form-warning-border: #f84d4d;
@@ -30,6 +34,7 @@ $product-detail-text: $very-dark-grey;
 #navbar {
   background-color: $navbar-bg-color;
   color: $navbar-txt-color;
+  border-bottom: $navbar-border solid 1px;
 
   a {
     color: $navbar-link-color;
@@ -60,10 +65,30 @@ $product-detail-text: $very-dark-grey;
   }
 }
 
+// -- Single Product --
+
+.product-title {
+  a {
+    color: $very-dark-grey;
+  }
+  .product-price {
+    a {
+      color: $light-grey;
+    }
+  }
+}
+
 // -- Product Details --
 
 .product-text {
   color: $product-detail-text;
 }
 
+// -- Weclome --
+
+.welcome-page {
+  > div {
+    background-color: $background-color;
+  }
+}
 // ************************************************

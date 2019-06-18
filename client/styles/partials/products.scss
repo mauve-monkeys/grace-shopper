@@ -9,14 +9,20 @@ $product-details-image-width: 300px;
     height: $product-img-height;
     object-fit: cover;
   }
-}
-.product-image {
-  width: $product-details-image-width;
-  height: $product-details-image-height;
-  object-fit: cover;
+  .product-price {
+    font-style: italic;
+  }
 }
 
-.product-name {
-  text-align: center;
-  margin-bottom: 20px;
+#product-details {
+  .product-image {
+    width: $product-details-image-width;
+    height: $product-details-image-height;
+    object-fit: cover;
+  }
+
+  .product-name {
+    text-align: center;
+    margin-bottom: 20px;
+  }
 }

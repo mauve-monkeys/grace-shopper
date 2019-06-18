@@ -39,13 +39,21 @@ main {
   }
 }
 
+// -- Single Product --
+.product-tile {
+  img,
+  > div {
+    margin: 5px;
+  }
+}
+
 // -- AllProducts --
 #all-products {
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
-  * {
-    margin: 10px;
+  > * {
+    margin: 20px;
   }
   h1 {
     height: $header-height;
@@ -137,4 +145,10 @@ main {
   .cart-button {
     grid-area: 5 / 5 / 6 / 6;
   }
+}
+
+.cart-view {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
 }

@@ -21,7 +21,7 @@ class CartView extends React.Component {
   // }
   render() {
     return (
-      <div className="main-content">
+      <div className="cart-view">
         {this.props.cart === null || this.props.cart.length === 0 ? (
           <div>Your cart is empty</div>
         ) : (
