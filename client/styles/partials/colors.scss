@@ -7,6 +7,7 @@ $light-grey: rgb(150, 150, 150);
 $dark-grey: rgb(85, 84, 84);
 $very-dark-grey: #222;
 $pastel-accent: rgb(157, 140, 235);
+$light-pink: rgb(245, 189, 215);
 
 $background-color: #fff;
 
@@ -62,6 +63,12 @@ button:hover {
   a:hover {
     color: $navbar-link-hover;
   }
+}
+
+// -- Footer --
+#footer {
+  background-color: $light-pink;
+  color: $dark-grey;
 }
 
 // -- Loading Spinner --

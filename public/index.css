@@ -98,6 +98,11 @@ button:hover {
   color: #9d8ceb;
 }
 
+#footer {
+  background-color: #f5bdd7;
+  color: #555454;
+}
+
 .loading-text {
   color: #969696;
 }
@@ -278,6 +283,13 @@ main > * {
   justify-content: flex-start;
 }
 
+#footer {
+  width: 100vw;
+  height: 60px;
+  position: fixed;
+  bottom: 0;
+}
+
 @keyframes bounce {
   0% {
     bottom: calc(100px * -1);
@@ -386,4 +398,9 @@ main > * {
   text-align: center;
   padding: 10px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+}
+
+#footer {
+  text-align: center;
+  padding: 10px;
 }

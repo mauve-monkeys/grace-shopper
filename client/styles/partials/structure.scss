@@ -14,6 +14,8 @@ $product-details-header: 50px;
 $banner-height: 150px;
 $welcome-img-height: 400px;
 
+$footer-height: 60px;
+
 // -- Navbar --
 #navbar {
   position: fixed;
@@ -176,4 +178,13 @@ main {
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
+}
+
+// -- Footer --
+
+#footer {
+  width: 100vw;
+  height: $footer-height;
+  position: fixed;
+  bottom: 0;
 }
