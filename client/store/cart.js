@@ -42,7 +42,7 @@ export const getCartAction = cart => ({
   cart
 })
 
-export const addCartAction = (product, quantity = 1) => ({
+export const addCartAction = (product, quantity = 1, orderId) => ({
   type: ADD_TO_CART,
   product: {
     id: product.id,
@@ -51,7 +51,7 @@ export const addCartAction = (product, quantity = 1) => ({
     imageUrl: product.imageUrl,
     orderDetail: {
       quantity,
-      orderId: product.orderDetail.orderId
+      orderId
     }
   }
   ///product = {product id, quantity // default to 1, size}
@@ -97,13 +97,15 @@ export const editQuantityThunk = (product, quantity, orderId) => {
   }
 }
 
-export const addToCartLoggedInThunk = (product, userId) => {
+export const addToCartLoggedInThunk = (product, userId, quantity = 1) => {
   return async dispatch => {
     try {
-      await axios.put(`/api/orders/${userId}/cart/add`, {
-        productId: product.id
-      }) //// we need to update this
-      dispatch(addCartAction(product))
+      const {data} = await axios.put(`/api/orders/${userId}/cart/add`, {
+        productId: product.id,
+        quantity: quantity
+      })
+      //data is the order id
+      dispatch(addCartAction(product, quantity, data))
     } catch (error) {
       console.error(error)
     }

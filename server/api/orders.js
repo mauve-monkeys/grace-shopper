@@ -57,7 +57,7 @@ router.put('/:userId/cart/add', async (req, res, next) => {
 
     let orderDetail = await OrderDetail.findOne({
       where: {
-        orderId: order.id,
+        orderId: +order.id,
         productId: +req.body.productId
       }
     })
@@ -83,12 +83,17 @@ router.put('/:userId/cart/add', async (req, res, next) => {
         })
       }
     } else {
+      console.log(
+        'type of & quantity',
+        typeof orderDetail.quantity,
+        orderDetail.quantity
+      )
       await orderDetail.update({
-        quantity: orderDetail.quantity + +req.body.quantity
+        quantity: +orderDetail.quantity + +req.body.quantity
       })
     }
 
-    res.status(201).send()
+    res.status(201).json(order.id)
   } catch (err) {
     next(err)
   }
