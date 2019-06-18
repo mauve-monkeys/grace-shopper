@@ -66,7 +66,7 @@ class ProfileForm extends React.Component {
 
   handleSumbit(event) {
     event.preventDefault()
-    this.props.updateUserDetails(this.props.user.id)
+    this.props.updateUserDetails(this.props.user.id, this.state)
   }
 
   handleChange(event) {
@@ -77,7 +77,8 @@ class ProfileForm extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  updateUserDetails: userId => dispatch(updateUserDetailsThunk(userId)),
+  updateUserDetails: (userId, values) =>
+    dispatch(updateUserDetailsThunk(userId, values)),
   getUserDetails: userId => dispatch(getUserDetailsThunk(userId))
 })
 
