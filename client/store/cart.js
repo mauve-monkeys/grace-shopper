@@ -20,7 +20,11 @@ const deSerializeCart = stringifiedCart => {
 /**
  * INITIAL STATE
  */
-const defaultCart = deSerializeCart(localStorage.getItem('GScart')) || [] // {
+
+let localCart = localStorage.getItem('GScart')
+const defaultCart = deSerializeCart(localCart ? localCart : '[]')
+
+// {
 //   id: 1,
 //   name: 'test product',
 //   price: '12.99',
