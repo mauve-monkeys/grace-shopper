@@ -15,7 +15,7 @@ const CartQuantity = props => {
           name="quantity"
           value={quantity}
           onChange={event =>
-            props.editQuantity(props.product, event.target.value, orderId)
+            props.editQuantity(props.product, +event.target.value, orderId)
           }
         >
           <option value="1">1</option>
