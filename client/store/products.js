@@ -7,6 +7,7 @@ import history from '../history'
 const GOT_ALL_PRODUCTS = 'GOT_ALL_PRODUCTS'
 const GOT_SINGLE_PRODUCT = 'GOT_SINGLE_PRODUCT'
 const RESET_LOADING = 'RESET_LOADING'
+const ADD_PRODUCT = 'ADD_PRODUCT'
 
 /**
  * INITIAL STATE
@@ -38,6 +39,11 @@ export const resetLoading = which => ({
   which //indicates if it's for allProducts or selected
 })
 
+const addedProduct = product => ({
+  type: ADD_PRODUCT,
+  product
+})
+
 /**
  * THUNK CREATORS
  */
@@ -58,6 +64,17 @@ export const getProductDetailsThunk = id => {
     try {
       const {data} = await axios.get(`/api/products/${id}`)
       dispatch(gotSingleProduct(data))
+    } catch (error) {
+      console.error(error.stack)
+    }
+  }
+}
+
+export const addProduct = product => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.put('/api/products/add', product)
+      dispatch(addedProduct(data))
     } catch (error) {
       console.error(error.stack)
     }
@@ -92,6 +109,11 @@ export default function(state = initialState, action) {
           ...state,
           loadingSelected: true
         }
+      }
+    case ADD_PRODUCT:
+      return {
+        ...state,
+        all: [...state.all, action.product]
       }
     default:
       return state

@@ -10,11 +10,11 @@ class DisconnectedOrders extends React.Component {
     this.state = {}
   }
   componentDidMount() {
-    // try {
-    //   this.props.getOrders(this.props.user.id)
-    // } catch (error) {
-    //   console.log(error)
-    // }
+    try {
+      this.props.getOrders(this.props.user.id)
+    } catch (error) {
+      console.log(error)
+    }
   }
   render() {
     if (!this.props.orders) {
@@ -30,6 +30,7 @@ class DisconnectedOrders extends React.Component {
               <th>Order Id</th>
               <th>Date Purchased</th>
               <th>Total Amount</th>
+              <th>Order Status</th>
             </tr>
           </thead>
           <tbody>

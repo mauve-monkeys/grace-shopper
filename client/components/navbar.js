@@ -5,29 +5,36 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import {CartNavbar} from '.'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
+const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
   <section id="navbar">
-    <h1>BOILERMAKER</h1>
+    <h1>Grace Rings</h1>
     <nav>
+      <span className="link-group">
+        <Link to="/products">Shop</Link>
+      </span>
       {isLoggedIn ? (
-        <div>
+        <span className="link-group">
           {/* The navbar will show these links after you log in */}
           <Link to="/home">Home</Link>
           <a href="#" onClick={handleClick}>
             Logout
           </a>
+          {isAdmin && (
+            /* This will show when logged in as admin */
+            <Link to="/add-product">Add Product</Link>
+          )}
           <CartNavbar />
-        </div>
+        </span>
       ) : (
-        <div>
+        <span className="link-group">
           {/* The navbar will show these links before you log in */}
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
           <CartNavbar />
-        </div>
+        </span>
       )}
     </nav>
-    <hr />
+    {/* <hr /> */}
   </section>
 )
 
@@ -36,7 +43,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    isAdmin: !!state.user.isAdmin
   }
 }
 

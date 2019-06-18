@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import {runInNewContext} from 'vm'
 
 //  ACTION TYPES
 const GET_ORDERS = 'GET_ORDERS'
@@ -15,8 +16,10 @@ const getOrders = orders => ({type: GET_ORDERS, orders})
 
 export const getOrdersThunk = userId => async dispatch => {
   try {
-    const {data} = await axios.get(`api/orders/cart/submit/${userId}`)
-    dispatch(getOrders(data))
+    const {data} = await axios.get(`/api/orders/${userId}/cart`)
+    if (data) {
+      dispatch(getOrders(data))
+    }
   } catch (error) {
     console.log(error)
   }

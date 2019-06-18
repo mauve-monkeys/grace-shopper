@@ -1,0 +1,22 @@
+/* 
+  Form Styles
+ */
+
+.form-container {
+  border-radius: 10px;
+
+  .form-title {
+    text-align: center;
+  }
+
+  // label {
+  //   padding-right: 5px;
+  // }
+
+  .warning {
+    border-radius: 5px;
+    font-style: italic;
+    font-size: 12px;
+    text-align: center;
+  }
+}

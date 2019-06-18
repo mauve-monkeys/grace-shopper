@@ -2,24 +2,56 @@
 **********************************************************/
 
 // ------ Color Variables ------
+$very-light-grey: #dddcdc;
+$light-grey: rgb(150, 150, 150);
+$dark-grey: rgb(85, 84, 84);
+$very-dark-grey: #222;
+$pastel-accent: rgb(157, 140, 235);
+$light-pink: rgb(245, 189, 215);
 
-$navbar-bg-color: #222;
-$navbar-txt-color: #fff;
-$navbar-link-color: #fff;
-$navbar-link-visited: #cac7c7;
-$navbar-link-hover: rgb(157, 140, 235);
+$background-color: #fff;
 
-$loading-spinner-text: rgb(146, 144, 144);
+$navbar-bg-color: $background-color;
+$navbar-txt-color: $very-dark-grey;
+$navbar-link-color: $very-dark-grey;
+$navbar-link-visited: $dark-grey;
+$navbar-link-hover: $pastel-accent;
+$navbar-border: $very-dark-grey;
+
+$loading-spinner-text: $light-grey;
 $loading-ball-color1: #71afe9e3;
 $loading-ball-color2: rgba(111, 226, 121, 0.993);
 $loading-ball-color3: #e3f34e;
 $loading-ball-color4: #cb6ce7;
+
+$form-background: $background-color;
+$form-border: $very-light-grey;
+$form-warning-bg: #fc8e8e;
+$form-warning-border: #f84d4d;
+
+$product-detail-text: $very-dark-grey;
+
+$button-color: $very-light-grey;
+$button-text: $very-dark-grey;
+$button-hover: $pastel-accent;
+
+// -- General --
+
+button {
+  background-color: $button-color;
+  color: $button-text;
+}
+
+button:hover {
+  background-color: $button-hover;
+}
 
 // -- Navbar --
 
 #navbar {
   background-color: $navbar-bg-color;
   color: $navbar-txt-color;
+  border-bottom: $navbar-border solid 1px;
 
   a {
     color: $navbar-link-color;
@@ -33,10 +65,53 @@ $loading-ball-color4: #cb6ce7;
   }
 }
 
+// -- Footer --
+#footer {
+  background-color: $light-pink;
+  color: $dark-grey;
+}
+
 // -- Loading Spinner --
 
 .loading-text {
   color: $loading-spinner-text;
 }
 
+// -- Form --
+
+.form-container {
+  background-color: $form-background;
+  border: $form-border solid 1px;
+  .warning {
+    background-color: $form-warning-bg;
+    border: $form-warning-border solid 2px;
+  }
+}
+
+// -- Products
+.product-price {
+  color: $light-grey;
+}
+
+// -- Single Product --
+
+.product-tile {
+  a {
+    color: $very-dark-grey;
+  }
+}
+
+// -- Product Details --
+
+.product-text {
+  color: $product-detail-text;
+}
+
+// -- Weclome --
+
+.welcome-page {
+  > div {
+    background-color: $background-color;
+  }
+}
 // ************************************************
