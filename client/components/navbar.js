@@ -7,7 +7,9 @@ import {CartNavbar} from '.'
 
 const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
   <section id="navbar">
-    <h1>Grace Rings</h1>
+    <h1>
+      <Link to="/">Grace Rings</Link>
+    </h1>
     <nav>
       <span className="link-group">
         <Link to="/products">Shop</Link>
@@ -15,7 +17,7 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
       {isLoggedIn ? (
         <span className="link-group">
           {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
+          <Link to="/myaccount">My Account</Link>
           <a href="#" onClick={handleClick}>
             Logout
           </a>

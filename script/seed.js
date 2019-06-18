@@ -8,7 +8,7 @@ const productsData = [
   {
     name: 'Sparkling Wishbone Ring',
     description:
-      'Make all your wishes come true with this delicate Pandora ring, crafted from sterling silver and lined with sparkling cubic zirconia stones. Simple yet elegant, this wishbone-shaped ring can be worn on its own as a shimmering statement, or paired with other Pandora stackable rings to create a unique, highly individual look.',
+      'Make all your wishes come true with this delicate ring, crafted from sterling silver and lined with sparkling cubic zirconia stones. Simple yet elegant, this wishbone-shaped ring can be worn on its own as a shimmering statement, or paired with other stackable rings to create a unique, highly individual look.',
     imageUrl:
       'https://www.becharming.com/media/catalog/product/cache/1/image/750x750/9df78eab33525d08d6e5fb8d27136e95/b/e/beaded_wish_ring-196315.jpg',
     price: 6999,
