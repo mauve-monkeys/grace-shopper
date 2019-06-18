@@ -42,7 +42,7 @@ const CartFull = props => {
           if (props.isLoggedIn) {
             props.submitCheckoutLoggedIn(props.user.id)
           } else {
-            props.submitCheckoutGuest()
+            props.submitCheckoutGuest(props.cart)
           }
         }}
       >
