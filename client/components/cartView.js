@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {
-  editQuantityThunk,
+  editQuantityLoggedInThunk,
   deleteCartItemAction,
   getCartUserThunk,
   getCartGuestThunk,
@@ -54,7 +54,7 @@ const mapState = state => ({
 
 const mapDispatch = dispatch => ({
   editQuantity: (product, quantity, orderId) =>
-    dispatch(editQuantityThunk(product, quantity, orderId)),
+    dispatch(editQuantityLoggedInThunk(product, quantity, orderId)),
   getCartUser: userId => dispatch(getCartUserThunk(userId)),
   getCartGuest: () => dispatch(getCartGuestThunk()),
   deleteCartItemGuest: product => dispatch(deleteCartItemGuestThunk(product)),

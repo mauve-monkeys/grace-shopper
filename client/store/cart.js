@@ -15,14 +15,16 @@ const serializeCart = cart => {
 }
 
 const deSerializeCart = stringifiedCart => {
+  if (!stringifiedCart) {
+    stringifiedCart = '[]'
+  }
   return JSON.parse(stringifiedCart)
 }
 /**
  * INITIAL STATE
  */
 
-let localCart = localStorage.getItem('GScart')
-const defaultCart = deSerializeCart(localCart ? localCart : '[]')
+const defaultCart = deSerializeCart(localStorage.getItem('GScart'))
 
 // {
 //   id: 1,
@@ -84,12 +86,33 @@ export const submitCheckoutAction = () => ({
  * THUNK CREATORS
  */
 
-export const editQuantityThunk = (product, quantity, orderId) => {
+export const editQuantityLoggedInThunk = (product, quantity, orderId) => {
   return async dispatch => {
     try {
       await axios.put(`/api/orderDetails/quantity/${orderId}/${product.id}`, {
         quantity
       })
+      dispatch(editItemQuantityAction(product, quantity))
+    } catch (error) {
+      console.error(error.stack)
+    }
+  }
+}
+
+export const editQuantityGuestThunk = (product, quantity) => {
+  return dispatch => {
+    try {
+      let cart = deSerializeCart(localStorage.getItem('GSCart'))
+
+      cart = cart.map(productObj => {
+        if (productObj.id === product.id) {
+          productObj.orderDetail.quantity = quantity
+        }
+        return productObj
+      })
+
+      localStorage.setItem('GSCart', serializeCart(cart))
+
       dispatch(editItemQuantityAction(product, quantity))
     } catch (error) {
       console.error(error.stack)
