@@ -14,11 +14,18 @@ const defaultState = [
 // ACTION CREATORS
 const getOrders = orders => ({type: GET_ORDERS, orders})
 
+// THUNKS
 export const getOrdersThunk = userId => async dispatch => {
   try {
-    const {data} = await axios.get(`/api/orders/${userId}/cart`)
+    const {data} = await axios.get(`/api/orders/${userId}`)
+    let orders = data[0].orders
+    let ordersFilter = orders.filter(currentOrder => {
+      if (currentOrder.status === 'confirmed') {
+        return currentOrder
+      }
+    })
     if (data) {
-      dispatch(getOrders(data))
+      dispatch(getOrders(ordersFilter))
     }
   } catch (error) {
     console.log(error)
