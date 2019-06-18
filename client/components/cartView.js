@@ -14,16 +14,6 @@ import CartEmpty from './cartEmpty'
 import CartFull from './cartFull'
 
 class CartView extends React.Component {
-  // componentDidMount() {
-  //   const getCart = this.props.isLoggedIn
-  //     ? this.props.getCartUser
-  //     : this.props.getCartGuest
-
-  //   console.log('cart', this.props.cart)
-  //   console.log('user', this.props.user)
-
-  //   getCart(this.props.user.id)
-  // }
   render() {
     return (
       <div className="cart-view">
@@ -38,7 +28,7 @@ class CartView extends React.Component {
             submitCheckoutLoggedIn={this.props.submitCheckoutLoggedIn}
             submitCheckoutGuest={this.props.submitCheckoutGuest}
             user={this.props.user}
-            editQuantity={this.props.editQuantity}
+            editQuantityLoggedIn={this.props.editQuantityLoggedIn}
             editQuantityGuest={this.props.editQuantityGuest}
           />
         )}

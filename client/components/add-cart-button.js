@@ -22,7 +22,7 @@ const DisconnectedAddCartButton = props => {
           if (isLoggedIn) {
             addToCartUser(selected, userId, quantity)
           } else {
-            addToCartGuest(selected)
+            addToCartGuest(selected, quantity)
           }
         }}
       >
@@ -33,7 +33,8 @@ const DisconnectedAddCartButton = props => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  addToCartGuest: product => dispatch(addToCartGuestThunk(product)),
+  addToCartGuest: (product, quantity) =>
+    dispatch(addToCartGuestThunk(product, quantity)),
   addToCartUser: (product, userId, quantity) =>
     dispatch(addToCartLoggedInThunk(product, userId, quantity))
 })

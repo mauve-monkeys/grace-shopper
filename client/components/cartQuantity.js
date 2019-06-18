@@ -1,5 +1,5 @@
 import React from 'react'
-//needs love
+
 const CartQuantity = props => {
   const orderId = props.product.orderDetail
     ? props.product.orderDetail.orderId
@@ -12,6 +12,8 @@ const CartQuantity = props => {
     ? props.editQuantityLoggedIn
     : props.editQuantityGuest
 
+  const setQuantity = props.setQuantity
+
   return (
     <div>
       <p>
@@ -19,9 +21,13 @@ const CartQuantity = props => {
         <select
           name="quantity"
           value={quantity}
-          onChange={event =>
-            editQuantity(props.product, +event.target.value, orderId)
-          }
+          onChange={event => {
+            if (editQuantity) {
+              editQuantity(props.product, +event.target.value, orderId)
+            } else {
+              setQuantity(props.product, +event.target.value)
+            }
+          }}
         >
           <option value="1">1</option>
           <option value="2">2</option>

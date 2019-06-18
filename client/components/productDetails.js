@@ -49,7 +49,7 @@ class DisconnectedProductDetails extends React.Component {
 
           <div className="product-price">${selected.price}</div>
 
-          <CartQuantity product={selected} editQuantity={this.setQuantity} />
+          <CartQuantity product={selected} setQuantity={this.setQuantity} />
           <label>
             Select Size:{' '}
             <select className="ring-select">
