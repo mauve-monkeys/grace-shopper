@@ -215,6 +215,16 @@ export const submitCheckoutLoggedInThunk = userId => {
   }
 }
 
+export const submitCheckoutGuestThunk = () => {
+  return dispatch => {
+    try {
+      localStorage.setItem('GScart', '')
+      dispatch(submitCheckoutAction())
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
 /**
  * REDUCER
  */
