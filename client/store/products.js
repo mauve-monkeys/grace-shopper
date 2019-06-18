@@ -29,7 +29,7 @@ const gotProducts = data => ({
   data
 })
 
-const gotSingleProduct = product => ({
+export const gotSingleProduct = product => ({
   type: GOT_SINGLE_PRODUCT,
   product
 })
