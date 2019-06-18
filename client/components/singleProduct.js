@@ -9,12 +9,11 @@ const SingleProduct = props => {
   return (
     <section className="product-tile">
       <Link to={`/products/${product.id}`}>
-        <img className="product-image" src={product.imageUrl} />
-        <div>
-          <div className="product-name">{product.name}</div>
-          <div className="product-price">${product.price}</div>
-        </div>
+        <img className="product-image" alt="" src={product.imageUrl} />
+
+        <div className="product-name">{product.name}</div>
       </Link>
+      <div className="product-price">${product.price}</div>
     </section>
   )
 }

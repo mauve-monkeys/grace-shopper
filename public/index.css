@@ -38,14 +38,27 @@ form div {
   display: inline-block;
 }
 
+button {
+  margin: 5px;
+}
+
+.product-price {
+  font-style: italic;
+}
+
 .product-tile img {
   width: 150px;
   height: 250px;
   object-fit: cover;
 }
 
+.product-tile .product-name,
 .product-tile .product-price {
-  font-style: italic;
+  margin: 5px;
+}
+
+.product-tile a:hover {
+  text-decoration: underline;
 }
 
 #product-details .product-image {
@@ -61,6 +74,15 @@ form div {
 
 /***************** ALL COLOR RELATED CSS *****************
 **********************************************************/
+button {
+  background-color: #dddcdc;
+  color: #222;
+}
+
+button:hover {
+  background-color: #9d8ceb;
+}
+
 #navbar {
   background-color: #fff;
   color: #222;
@@ -77,24 +99,24 @@ form div {
 }
 
 .loading-text {
-  color: #929090;
+  color: #969696;
 }
 
 .form-container {
   background-color: #fff;
-  border: #cac7c7 solid 1px;
+  border: #dddcdc solid 1px;
 }
 .form-container .warning {
   background-color: #fc8e8e;
   border: #f84d4d solid 2px;
 }
 
-.product-title a {
-  color: #222;
+.product-price {
+  color: #969696;
 }
 
-.product-title .product-price a {
-  color: #929090;
+.product-tile a {
+  color: #222;
 }
 
 .product-text {

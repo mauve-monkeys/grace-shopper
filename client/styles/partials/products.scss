@@ -3,14 +3,23 @@ $product-img-height: 250px;
 $product-details-image-height: 400px;
 $product-details-image-width: 300px;
 
+.product-price {
+  font-style: italic;
+}
+
 .product-tile {
   img {
     width: $product-img-width;
     height: $product-img-height;
     object-fit: cover;
   }
+  .product-name,
   .product-price {
-    font-style: italic;
+    margin: 5px;
+  }
+
+  a:hover {
+    text-decoration: underline;
   }
 }
 

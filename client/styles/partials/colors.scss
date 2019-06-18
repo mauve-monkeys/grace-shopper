@@ -2,10 +2,11 @@
 **********************************************************/
 
 // ------ Color Variables ------
-$very-light-grey: #cac7c7;
-$light-grey: rgb(146, 144, 144);
+$very-light-grey: #dddcdc;
+$light-grey: rgb(150, 150, 150);
 $dark-grey: rgb(85, 84, 84);
 $very-dark-grey: #222;
+$pastel-accent: rgb(157, 140, 235);
 
 $background-color: #fff;
 
@@ -13,7 +14,7 @@ $navbar-bg-color: $background-color;
 $navbar-txt-color: $very-dark-grey;
 $navbar-link-color: $very-dark-grey;
 $navbar-link-visited: $dark-grey;
-$navbar-link-hover: rgb(157, 140, 235);
+$navbar-link-hover: $pastel-accent;
 $navbar-border: $very-dark-grey;
 
 $loading-spinner-text: $light-grey;
@@ -28,6 +29,21 @@ $form-warning-bg: #fc8e8e;
 $form-warning-border: #f84d4d;
 
 $product-detail-text: $very-dark-grey;
+
+$button-color: $very-light-grey;
+$button-text: $very-dark-grey;
+$button-hover: $pastel-accent;
+
+// -- General --
+
+button {
+  background-color: $button-color;
+  color: $button-text;
+}
+
+button:hover {
+  background-color: $button-hover;
+}
 
 // -- Navbar --
 
@@ -65,16 +81,16 @@ $product-detail-text: $very-dark-grey;
   }
 }
 
+// -- Products
+.product-price {
+  color: $light-grey;
+}
+
 // -- Single Product --
 
-.product-title {
+.product-tile {
   a {
     color: $very-dark-grey;
-  }
-  .product-price {
-    a {
-      color: $light-grey;
-    }
   }
 }
 

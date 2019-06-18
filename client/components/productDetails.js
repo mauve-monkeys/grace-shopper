@@ -28,14 +28,20 @@ class DisconnectedProductDetails extends React.Component {
     return (
       <section id="product-details">
         <h1 className="product-name">{selected.name}</h1>
-        <img className="product-image" src={selected.imageUrl} />
+        <img className="product-image" src={selected.imageUrl} alt="" />
         <div className="product-text">
           <div className="product-description">{selected.description}</div>
+
+          <div className="product-materials">
+            <span className="product-stone-tag">{selected.stone}</span>
+            ・
+            <span className="product-band-tag">{selected.band}</span>
+          </div>
+
           <div className="product-price">${selected.price}</div>
-          <div className="product-stone-tag">Stone: {selected.stone}</div>
-          <div className="product-band-tag">Band: {selected.band}</div>
+
           <label>
-            Select Size:
+            Select Size:{' '}
             <select className="ring-select">
               <option value="4">4</option>
               <option value="4">5</option>
