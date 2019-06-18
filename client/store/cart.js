@@ -220,10 +220,21 @@ export default function(state = defaultCart, action) {
     case GET_CART:
       return action.cart
     case ADD_TO_CART:
-      if (state === null) {
-        state = []
+      let updatedQuantity = false
+      // check to see if product is already in cart, if so just update the quantity
+      let cartCopy = state.map(product => {
+        // if item is in cart
+        if (product.id === action.product.id) {
+          product.orderDetail.quantity += action.product.orderDetail.quantity
+          updatedQuantity = true
+        }
+        return product
+      })
+      if (updatedQuantity) {
+        return cartCopy
+      } else {
+        return [...state, {...action.product}]
       }
-      return [...state, {...action.product}]
     case DELETE_CART_ITEM:
       return state.filter(productObj => productObj.id !== action.product.id)
     case EDIT_QUANTITY:
