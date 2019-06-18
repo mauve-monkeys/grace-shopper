@@ -171,6 +171,7 @@ main {
 }
 main > * {
   margin: calc(130px + 20px) 20px 20px 20px;
+  padding-bottom: 60px;
 }
 
 .welcome-page {
@@ -277,10 +278,14 @@ main > * {
   grid-area: 5 / 5 / 6 / 6;
 }
 
-.cart-view {
+.cart-view #cart-items {
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
+}
+
+.cart-view button {
+  margin-top: 10px;
 }
 
 #footer {

@@ -43,6 +43,7 @@ main {
     // all direct descendents of main
     // must interpolate sass variables to use them in calc
     margin: calc(#{$navbar-height} + 20px) 20px 20px 20px;
+    padding-bottom: $footer-height;
   }
 }
 
@@ -175,9 +176,14 @@ main {
 }
 
 .cart-view {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-start;
+  #cart-items {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+  }
+  button {
+    margin-top: 10px;
+  }
 }
 
 // -- Footer --
