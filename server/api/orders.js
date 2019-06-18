@@ -94,32 +94,6 @@ router.put('/:userId/cart/add', async (req, res, next) => {
   }
 })
 
-// router.put('/:userId/cart/add', async (req, res, next) => {
-//   try {
-//     const [order] = await Order.findOrCreate({
-//       where: {
-//         userId: +req.params.userId,
-//         status: 'pending'
-//       }
-//     })
-//     const product = await Product.findOne({
-//       where: {
-//         id: +req.body.productId
-//       }
-//     })
-//     if (!product) {
-//       res.status(404).send('Product not found')
-//     }
-//     // check if product is in the order, if it is then update the quantity
-
-//     // if not then add the order
-//     await order.addProduct(product)
-//     res.status(201).send()
-//   } catch (err) {
-//     next(err)
-//   }
-// })
-
 router.put('/:orderId/cart/delete/:productId', async (req, res, next) => {
   try {
     const order = await Order.findOne({

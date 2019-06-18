@@ -50,10 +50,11 @@ export const addCartAction = (product, quantity = 1) => ({
     price: product.price,
     imageUrl: product.imageUrl,
     orderDetail: {
-      quanity: quantity
+      quantity,
+      orderId: product.orderDetail.orderId
     }
   }
-  ///product = {product id, quanity // default to 1, size}
+  ///product = {product id, quantity // default to 1, size}
 })
 
 export const deleteCartItemAction = product => ({
@@ -61,7 +62,7 @@ export const deleteCartItemAction = product => ({
   product
 })
 
-export const editItemQuanityAction = (product, quantity) => ({
+export const editItemQuantityAction = (product, quantity) => ({
   type: EDIT_QUANTITY,
   product: {
     id: product.id,
@@ -69,7 +70,8 @@ export const editItemQuanityAction = (product, quantity) => ({
     price: product.price,
     imageUrl: product.imageUrl,
     orderDetail: {
-      quanity: quantity
+      quantity,
+      orderId: product.orderDetail.orderId
     }
   }
 })
@@ -82,9 +84,18 @@ export const submitCheckoutAction = () => ({
  * THUNK CREATORS
  */
 
-//Where do we put this logic?
-/// [{id,  orderDetail.quantity}, {id, orderDetail.quanity} ]
-/// "id:quanty,id2:quantity2"
+export const editQuantityThunk = (product, quantity, orderId) => {
+  return async dispatch => {
+    try {
+      await axios.put(`/api/orderDetails/quantity/${orderId}/${product.id}`, {
+        quantity
+      })
+      dispatch(editItemQuantityAction(product, quantity))
+    } catch (error) {
+      console.error(error.stack)
+    }
+  }
+}
 
 export const addToCartLoggedInThunk = (product, userId) => {
   return async dispatch => {
@@ -192,9 +203,9 @@ export default function(state = defaultCart, action) {
       return state.filter(productObj => productObj.id !== action.product.id)
     case EDIT_QUANTITY:
       return [
-        ...state.filter(
-          productObj => productObj.product.id !== action.product.id
-        ),
+        ...state.filter(productObj => {
+          return productObj.id !== action.product.id
+        }),
         action.product
       ]
     case SUBMIT_CHECKOUT:

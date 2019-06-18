@@ -3,10 +3,16 @@ import React from 'react'
 const CartQuantity = props => {
   return (
     <div>
-      <p>Quantity: {product.orderDetail.quantity}</p>
+      <p>Quantity: {props.product.orderDetail.quantity}</p>
       <select
         name="quantity"
-        onChange={event => props.editQuantity(product, event.target.value)}
+        onChange={event =>
+          props.editQuantity(
+            props.product,
+            event.target.value,
+            props.product.orderDetail.orderId
+          )
+        }
       >
         <option value="1">1</option>
         <option value="2">2</option>

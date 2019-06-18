@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {
-  editItemQuanityAction,
+  editQuantityThunk,
   deleteCartItemAction,
   getCartUserThunk,
   getCartGuestThunk,
@@ -38,6 +38,7 @@ class CartView extends React.Component {
             submitCheckoutLoggedIn={this.props.submitCheckoutLoggedIn}
             submitCheckoutGuest={this.props.submitCheckoutGuest}
             user={this.props.user}
+            editQuantity={this.props.editQuantity}
           />
         )}
       </div>
@@ -52,7 +53,8 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  editQuantity: (item, value) => dispatch(editItemQuanityAction(item, value)),
+  editQuantity: (product, quantity, orderId) =>
+    dispatch(editQuantityThunk(product, quantity, orderId)),
   getCartUser: userId => dispatch(getCartUserThunk(userId)),
   getCartGuest: () => dispatch(getCartGuestThunk()),
   deleteCartItemGuest: product => dispatch(deleteCartItemGuestThunk(product)),

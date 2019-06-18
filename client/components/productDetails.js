@@ -1,7 +1,7 @@
 import React from 'react'
 import {getProductDetailsThunk, resetLoading} from '../store/products'
 import {connect} from 'react-redux'
-import {Loading, AddCartButton} from '.'
+import {Loading, AddCartButton, CartQuantity} from '.'
 
 class DisconnectedProductDetails extends React.Component {
   constructor() {
@@ -40,6 +40,7 @@ class DisconnectedProductDetails extends React.Component {
 
           <div className="product-price">${selected.price}</div>
 
+          {/* <CartQuantity product={selected} /> */}
           <label>
             Select Size:{' '}
             <select className="ring-select">

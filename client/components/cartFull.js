@@ -9,7 +9,7 @@ const CartFull = props => {
         return (
           <div key={product.id}>
             <SingleProduct product={product} />
-            {/* <CartQuantity /> //need to pass props*/}
+            <CartQuantity product={product} editQuantity={props.editQuantity} />
             <button
               type="button"
               onClick={() => {
