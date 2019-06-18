@@ -8,7 +8,7 @@ const SingleOrder = props => {
     // className="order-tile"
     <tr key={order.id}>
       <td>{order.id}</td>
-      <td>{order.updatedAt}</td>
+      <td>{order.updatedAt.slice(0, 10)}</td>
       <td>{order.total}</td>
       <td>{order.status}</td>
     </tr>

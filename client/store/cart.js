@@ -39,7 +39,7 @@ const defaultCart = deSerializeCart(localStorage.getItem('GScart'))
 /**
  * ACTION CREATORS
  */
-export const getCartAction = cart => ({
+export const getCartAction = (cart = []) => ({
   type: GET_CART,
   cart
 })
