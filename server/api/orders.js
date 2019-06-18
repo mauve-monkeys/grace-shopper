@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, Order, Product} = require('../db/models')
+const {User, Order, Product, OrderDetail} = require('../db/models')
 module.exports = router
 
 //  api/orders
@@ -54,20 +54,71 @@ router.put('/:userId/cart/add', async (req, res, next) => {
         status: 'pending'
       }
     })
-    const product = await Product.findOne({
+
+    let orderDetail = await OrderDetail.findOne({
       where: {
-        id: +req.body.productId
+        orderId: order.id,
+        productId: +req.body.productId
       }
     })
-    if (!product) {
-      res.status(404).send('Product not found')
+    // check if product is in the order, if it is then update the quantity
+
+    if (!orderDetail) {
+      const product = await Product.findOne({
+        where: {
+          id: +req.body.productId
+        }
+      })
+      if (!product) {
+        res.status(404).send('Product not found')
+      }
+
+      // add the order
+      const [newOrderDetail] = await order.addProduct(product)
+
+      // if adding more than one at a time update model
+      if (+req.body.quantity > 1) {
+        await newOrderDetail.update({
+          quantity: +req.body.quantity
+        })
+      }
+    } else {
+      await orderDetail.update({
+        quantity: orderDetail.quantity + +req.body.quantity
+      })
     }
-    await order.addProductCustom(product)
+
     res.status(201).send()
   } catch (err) {
     next(err)
   }
 })
+
+// router.put('/:userId/cart/add', async (req, res, next) => {
+//   try {
+//     const [order] = await Order.findOrCreate({
+//       where: {
+//         userId: +req.params.userId,
+//         status: 'pending'
+//       }
+//     })
+//     const product = await Product.findOne({
+//       where: {
+//         id: +req.body.productId
+//       }
+//     })
+//     if (!product) {
+//       res.status(404).send('Product not found')
+//     }
+//     // check if product is in the order, if it is then update the quantity
+
+//     // if not then add the order
+//     await order.addProduct(product)
+//     res.status(201).send()
+//   } catch (err) {
+//     next(err)
+//   }
+// })
 
 router.put('/:orderId/cart/delete/:productId', async (req, res, next) => {
   try {
@@ -77,7 +128,7 @@ router.put('/:orderId/cart/delete/:productId', async (req, res, next) => {
     const product = await Product.findOne({
       where: {id: req.params.productId}
     })
-    await order.removeProductCustom(product)
+    await order.removeProduct(product)
     res.status(201).send()
   } catch (error) {
     next(error)
