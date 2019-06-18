@@ -1,9 +1,9 @@
 // place associations here
 
 const User = require('./user')
+const OrderDetail = require('./orderDetail')
 const Product = require('./product')
 const Order = require('./order')
-const OrderDetail = require('./orderDetail')
 
 module.exports = {
   User,
@@ -14,5 +14,13 @@ module.exports = {
 
 User.hasMany(Order)
 Order.belongsTo(User)
-Order.belongsToMany(Product, {through: OrderDetail})
-Product.belongsToMany(Order, {through: OrderDetail})
+Order.belongsToMany(Product, {
+  through: OrderDetail,
+  onDelete: 'cascade',
+  hooks: true
+})
+Product.belongsToMany(Order, {
+  through: OrderDetail,
+  onDelete: 'cascade',
+  hooks: true
+})

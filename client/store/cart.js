@@ -12,17 +12,15 @@ const EDIT_QUANTITY = 'EDIT_QUANTITY'
 /**
  * INITIAL STATE
  */
-const defaultCart = [
-  {
-    id: 1,
-    name: 'test product',
-    price: '12.99',
-    imageUrl: '',
-    orderDetail: {
-      quantity: 3
-    }
-  }
-]
+const defaultCart = [] // {
+//   id: 1,
+//   name: 'test product',
+//   price: '12.99',
+//   imageUrl: '',
+//   orderDetail: {
+//     quantity: 3
+//   }
+// }
 
 /**
  * ACTION CREATORS
@@ -69,6 +67,16 @@ export const editItemQuanityAction = (product, quantity) => ({
  */
 
 //Where do we put this logic?
+/// [{id,  orderDetail.quantity}, {id, orderDetail.quanity} ]
+/// "id:quanty,id2:quantity2"
+const serializeCart = cart => {
+  return JSON.stringify(cart)
+}
+
+const deSerializeCart = stringifiedCart => {
+  return JSON.parse(stringifiedCart)
+}
+
 export const addToCartLoggedInThunk = (product, userId) => {
   return async dispatch => {
     try {
@@ -84,11 +92,19 @@ export const addToCartLoggedInThunk = (product, userId) => {
 
 export const addToCartGuestThunk = product => {
   return dispatch => {
-    // if (localStorage.cart) {
-    //   localStorage.setItem('cart', [...localStorage.cart, product])
-    // } else {
-    //   localStorage.setItem('cart', [product])
-    // }
+    let cart = deSerializeCart(localStorage.getItem('GScart'))
+    if (cart === null) {
+      cart = []
+    }
+    const newCart = [...cart, product]
+    if (newCart[newCart.length - 1].orderDetail) {
+      newCart[newCart.length - 1].orderDetail.quantity++
+    } else {
+      newCart[newCart.length - 1].orderDetail = {
+        quantity: 1
+      }
+    }
+    localStorage.setItem('GScart', serializeCart(newCart))
     dispatch(addCartAction(product))
   }
 }
@@ -96,8 +112,8 @@ export const addToCartGuestThunk = product => {
 export const getCartGuestThunk = () => {
   return dispatch => {
     try {
-      console.log('guestcartthunk')
-      dispatch(getCartAction([]))
+      const cart = deSerializeCart(localStorage.getItem('GScart'))
+      dispatch(getCartAction(cart))
     } catch (error) {
       console.error(error)
     }
@@ -109,7 +125,7 @@ export const getCartUserThunk = userId => {
     try {
       const {data} = await axios.get(`/api/orders/${userId}/cart`)
 
-      dispatch(getCartAction(data[0].products))
+      dispatch(getCartAction(data.products))
     } catch (error) {
       console.error(error)
     }
@@ -125,7 +141,10 @@ export default function(state = defaultCart, action) {
     case GET_CART:
       return action.cart
     case ADD_TO_CART:
-      return [...state, action.product]
+      if (state === null) {
+        state = []
+      }
+      return [...state, {...action.product}]
     case DELETE_CART_ITEM:
       return state.filter(productObj => productObj.id !== action.product.id)
     case EDIT_QUANTITY:

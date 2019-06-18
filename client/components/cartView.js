@@ -22,32 +22,37 @@ class CartView extends React.Component {
   render() {
     return (
       <div className="main-content">
-        {this.props.cart.map(product => {
-          return (
-            <div key={product.id}>
-              <SingleProduct product={product} />
-              <p>Quantity: {product.orderDetail.quantity}</p>
-              <select
-                name="quanity"
-                onChange={event =>
-                  this.props.editQuantity(product, event.target.value)
-                }
-              >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
-              <button
-                type="button"
-                onClick={() => this.props.deleteItem(product)}
-              >
-                Delete
-              </button>
-            </div>
-          )
-        })}
+        {this.props.cart === null || this.props.cart.length === 0 ? (
+          <div>Your cart is empty</div>
+        ) : (
+          this.props.cart.map(product => {
+            return (
+              <div key={product.id}>
+                <SingleProduct product={product} />
+                {console.log(product)}
+                <p>Quantity: {product.orderDetail.quantity}</p>
+                <select
+                  name="quanity"
+                  onChange={event =>
+                    this.props.editQuantity(product, event.target.value)
+                  }
+                >
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+                <button
+                  type="button"
+                  onClick={() => this.props.deleteItem(product)}
+                >
+                  Delete
+                </button>
+              </div>
+            )
+          })
+        )}
       </div>
     )
   }

@@ -38,6 +38,12 @@ form div {
   display: inline-block;
 }
 
+.product-tile img {
+  width: 150px;
+  height: 250px;
+  object-fit: cover;
+}
+
 /***************** ALL COLOR RELATED CSS *****************
 **********************************************************/
 #navbar {
@@ -52,6 +58,19 @@ form div {
 }
 #navbar a:hover {
   color: #9d8ceb;
+}
+
+.loading-text {
+  color: #929090;
+}
+
+.form-container {
+  background-color: #fff;
+  border: #c0c0c0 solid 1px;
+}
+.form-container .warning {
+  background-color: #fc8e8e;
+  border: #f84d4d solid 2px;
 }
 
 #navbar {
@@ -72,15 +91,24 @@ form div {
   top: 0;
   height: 150px;
 }
+#navbar nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
 /* 
   Make sure all the main content sections are not covered by the navbar
-
-  TO DO: add main-content className to all-products & product details and other future components that will sit below navbar
 */
-.main-content,
-#all-products,
-#product-details {
+main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* account for nav height */
+  height: calc(100vh - 150px);
+}
+main > * {
   margin: calc(150px + 20px) 20px 20px 20px;
 }
 
@@ -95,4 +123,147 @@ form div {
 #all-products h1 {
   height: 35px;
   flex: 1 100%;
+}
+
+#loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+#loading-spinner #loading-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.form-container {
+  padding: 5px 10px 10px 10px;
+}
+.form-container .form-title {
+  margin: 10px 0;
+}
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  min-width: 400px;
+}
+.form-container form .form-field-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 60px;
+  grid-template-rows: auto;
+  grid-row-gap: 5px;
+  align-items: center;
+}
+.form-container form .form-field-container .form-field {
+  margin: 5px;
+  grid-column: 1 / 2;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-column-gap: 10px;
+}
+.form-container form button {
+  margin: 5px 10px 5px 10px;
+}
+.form-container .warning {
+  grid-column: 2 / 3;
+}
+
+@keyframes bounce {
+  0% {
+    bottom: calc(100px * -1);
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+  }
+  100% {
+    bottom: 0;
+    box-shadow: 0 50px 50px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@keyframes loading-text {
+  0% {
+    content: 'Loading';
+  }
+  25% {
+    content: 'Loading.';
+  }
+  50% {
+    content: 'Loading..';
+  }
+  75% {
+    content: 'Loading...';
+  }
+}
+
+#loading-container {
+  height: calc(100px + 20px);
+  width: 200px;
+  align-content: center;
+  margin: 20px 10px;
+}
+
+.loading-ball {
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  position: relative;
+  animation-name: bounce;
+  animation-duration: 0.4s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-fill-mode: both;
+}
+
+.loading-ball:nth-child(1) {
+  background-color: #71afe9e3;
+  animation-delay: 0s;
+}
+
+.loading-ball:nth-child(2) {
+  background-color: rgba(111, 226, 121, 0.993);
+  animation-delay: 0.2s;
+}
+
+.loading-ball:nth-child(3) {
+  background-color: #e3f34e;
+  animation-delay: 0.4s;
+}
+
+.loading-ball:nth-child(4) {
+  background-color: #cb6ce7;
+  animation-delay: 0.6s;
+}
+
+.loading-text {
+  position: relative;
+  left: calc((200px / 2) - 20px);
+}
+
+.loading-text::after {
+  content: 'Loading';
+  font-style: italic;
+  animation-name: loading-text;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* 
+  Form Styles
+ */
+.form-container {
+  border-radius: 10px;
+}
+.form-container .form-title {
+  text-align: center;
+}
+.form-container label {
+  padding-right: 1em;
+}
+.form-container .warning {
+  border-radius: 5px;
+  font-style: italic;
+  font-size: 12px;
+  text-align: center;
 }

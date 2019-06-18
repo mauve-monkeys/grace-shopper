@@ -5,14 +5,19 @@ import {connect} from 'react-redux'
 const DisconnectedAddCartButton = props => {
   /// const for props
   const {selected, addToCartUser, addToCartGuest, isLoggedIn, userId} = props
-  const addToCart = isLoggedIn ? addToCartUser : addToCartGuest
 
   return (
     <div>
       <button
         id="addCartButton"
         type="button"
-        onClick={() => addToCart(selected, userId)}
+        onClick={() => {
+          if (isLoggedIn) {
+            addToCartUser(selected, userId)
+          } else {
+            addToCartGuest(selected)
+          }
+        }}
       >
         add to cart
       </button>

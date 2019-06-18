@@ -1,8 +1,9 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
+const Order = require('./order')
 
 const OrderDetail = db.define('orderDetail', {
-  quanity: {
+  quantity: {
     type: Sequelize.INTEGER,
     defaultValue: 1,
     validate: {

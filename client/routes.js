@@ -8,7 +8,9 @@ import {
   UserHome,
   AllProducts,
   ProductDetails,
-  CartView
+  CartView,
+  Loading,
+  AddProductForm
 } from './components'
 import {me} from './store'
 import {getCartUserThunk, getCartGuestThunk} from './store/cart'
@@ -30,7 +32,7 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn} = this.props
+    const {isLoggedIn, isAdmin} = this.props
 
     return (
       <Switch>
@@ -43,11 +45,16 @@ class Routes extends Component {
         />
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/cart" component={CartView} />
+        <Route exact path="/loading" component={Loading} />
 
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
+            {isAdmin && (
+              /* Routes placed here are only available as an admin */
+              <Route path="/add-product" component={AddProductForm} />
+            )}
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
@@ -65,7 +72,8 @@ const mapState = state => {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
-    user: state.user
+    user: state.user,
+    isAdmin: !!state.user.isAdmin
   }
 }
 

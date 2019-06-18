@@ -9,6 +9,17 @@ $navbar-link-color: #fff;
 $navbar-link-visited: #cac7c7;
 $navbar-link-hover: rgb(157, 140, 235);
 
+$loading-spinner-text: rgb(146, 144, 144);
+$loading-ball-color1: #71afe9e3;
+$loading-ball-color2: rgba(111, 226, 121, 0.993);
+$loading-ball-color3: #e3f34e;
+$loading-ball-color4: #cb6ce7;
+
+$form-background: #fff;
+$form-border: #c0c0c0;
+$form-warning-bg: #fc8e8e;
+$form-warning-border: #f84d4d;
+
 // -- Navbar --
 
 #navbar {
@@ -24,6 +35,23 @@ $navbar-link-hover: rgb(157, 140, 235);
   }
   a:hover {
     color: $navbar-link-hover;
+  }
+}
+
+// -- Loading Spinner --
+
+.loading-text {
+  color: $loading-spinner-text;
+}
+
+// -- Form --
+
+.form-container {
+  background-color: $form-background;
+  border: $form-border solid 1px;
+  .warning {
+    background-color: $form-warning-bg;
+    border: $form-warning-border solid 2px;
   }
 }
 

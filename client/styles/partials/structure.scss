@@ -13,20 +13,32 @@ $single-product-width: 320px;
   position: fixed;
   top: 0;
   height: $navbar-height;
+  nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
 
 /* 
   Make sure all the main content sections are not covered by the navbar
-
-  TO DO: add main-content className to all-products & product details and other future components that will sit below navbar
 */
-.main-content,
-#all-products,
-#product-details {
-  // must interpolate sass variables to use them in calc
-  margin: calc(#{$navbar-height} + 20px) 20px 20px 20px;
+
+main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* account for nav height */
+  height: calc(100vh - #{$navbar-height});
+  > * {
+    // all direct descendents of main
+    // must interpolate sass variables to use them in calc
+    margin: calc(#{$navbar-height} + 20px) 20px 20px 20px;
+  }
 }
 
+// -- AllProducts --
 #all-products {
   display: flex;
   flex-flow: row wrap;
@@ -37,5 +49,58 @@ $single-product-width: 320px;
   h1 {
     height: $header-height;
     flex: 1 100%;
+  }
+}
+
+// -- Loading Spinner --
+
+#loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+
+  #loading-container {
+    display: flex;
+    justify-content: space-around;
+  }
+}
+
+// -- Form --
+
+.form-container {
+  padding: 5px 10px 10px 10px;
+
+  .form-title {
+    margin: 10px 0;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    min-width: 400px;
+
+    .form-field-container {
+      width: 100%;
+      display: grid;
+      grid-template-columns: auto 60px;
+      grid-template-rows: auto;
+      grid-row-gap: 5px;
+      align-items: center;
+
+      .form-field {
+        margin: 5px;
+        grid-column: 1 / 2;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-column-gap: 10px;
+      }
+    }
+    button {
+      margin: 5px 10px 5px 10px;
+    }
+  }
+  .warning {
+    grid-column: 2 / 3;
   }
 }
