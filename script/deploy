@@ -21,6 +21,7 @@ set -e
 # Whether the deploy succeeds or fails, we'll clean up the deploy branch.
 
 function cleanup_at_exit {
+  git stash
   # return to your master branch
   git checkout master
   

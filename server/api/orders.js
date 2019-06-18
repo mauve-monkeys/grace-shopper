@@ -83,11 +83,6 @@ router.put('/:userId/cart/add', async (req, res, next) => {
         })
       }
     } else {
-      console.log(
-        'type of & quantity',
-        typeof orderDetail.quantity,
-        orderDetail.quantity
-      )
       await orderDetail.update({
         quantity: +orderDetail.quantity + +req.body.quantity
       })
