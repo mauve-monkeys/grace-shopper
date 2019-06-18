@@ -215,9 +215,12 @@ export const submitCheckoutLoggedInThunk = userId => {
   }
 }
 
-export const submitCheckoutGuestThunk = () => {
-  return dispatch => {
+export const submitCheckoutGuestThunk = cart => {
+  return async dispatch => {
     try {
+      await axios.post(`/api/orders/cart/submit/guest`, {
+        cart
+      })
       localStorage.setItem('GScart', '')
       dispatch(submitCheckoutAction())
     } catch (error) {

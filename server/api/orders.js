@@ -114,14 +114,6 @@ router.put('/:orderId/cart/delete/:productId', async (req, res, next) => {
   }
 })
 
-router.put('/cart/submit/guest', async (req, res, next) => {
-  try {
-    //tbd
-  } catch (err) {
-    next(err)
-  }
-})
-
 router.put('/cart/submit/:userId', async (req, res, next) => {
   try {
     const order = await Order.findOne({
@@ -138,5 +130,25 @@ router.put('/cart/submit/:userId', async (req, res, next) => {
     res.status(201).send(order)
   } catch (err) {
     next(err)
+  }
+})
+
+router.post('/cart/submit/guest', async (req, res, next) => {
+  try {
+    const order = await Order.create({
+      status: 'confirmed'
+    })
+    let cart = req.body.cart
+
+    for (let i = 0; i < cart.length; ++i) {
+      let product = await Product.findOne({
+        where: {id: +cart[i].id}
+      })
+      let [orderDetail] = await order.addProduct(product)
+      await orderDetail.update({quantity: +cart[i].orderDetail.quantity})
+    }
+    res.status(201).send()
+  } catch (error) {
+    next(error)
   }
 })

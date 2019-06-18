@@ -53,7 +53,7 @@ const mapDispatch = dispatch => ({
     dispatch(deleteCartItemLoggedInThunk(product, orderId)),
   submitCheckoutLoggedIn: userId =>
     dispatch(submitCheckoutLoggedInThunk(userId)),
-  submitCheckoutGuest: () => dispatch(submitCheckoutGuestThunk()),
+  submitCheckoutGuest: cart => dispatch(submitCheckoutGuestThunk(cart)),
   editQuantityGuest: (product, quantity) =>
     dispatch(editQuantityGuestThunk(product, quantity))
 })
