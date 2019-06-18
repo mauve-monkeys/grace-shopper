@@ -5,7 +5,9 @@ import {Link} from 'react-router-dom'
 const CartNavbar = props => {
   let cartNum
   if (props.cart) {
-    cartNum = props.cart.length
+    cartNum = props.cart.reduce((total, product) => {
+      return total + product.orderDetail.quantity
+    }, 0)
   } else {
     cartNum = 0
   }

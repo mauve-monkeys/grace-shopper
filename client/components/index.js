@@ -17,3 +17,5 @@ export {default as Loading} from './loading'
 export {default as AddProductForm} from './addProduct'
 export {default as Welcome} from './welcome'
 export {default as Footer} from './footer'
+
+export {default as CartQuantity} from './cartQuantity'

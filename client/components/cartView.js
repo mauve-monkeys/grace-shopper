@@ -1,57 +1,36 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {
-  editItemQuanityAction,
-  deleteCartItemAction,
+  editQuantityLoggedInThunk,
+  editQuantityGuestThunk,
   getCartUserThunk,
-  getCartGuestThunk
+  getCartGuestThunk,
+  deleteCartItemGuestThunk,
+  deleteCartItemLoggedInThunk,
+  submitCheckoutLoggedInThunk,
+  submitCheckoutAction
 } from '../store/cart'
-import SingleProduct from './singleProduct'
+import CartEmpty from './cartEmpty'
+import CartFull from './cartFull'
 
 class CartView extends React.Component {
-  // componentDidMount() {
-  //   const getCart = this.props.isLoggedIn
-  //     ? this.props.getCartUser
-  //     : this.props.getCartGuest
-
-  //   console.log('cart', this.props.cart)
-  //   console.log('user', this.props.user)
-
-  //   getCart(this.props.user.id)
-  // }
   render() {
     return (
       <div className="cart-view">
         {this.props.cart === null || this.props.cart.length === 0 ? (
-          <div>Your cart is empty</div>
+          <CartEmpty />
         ) : (
-          this.props.cart.map(product => {
-            return (
-              <div key={product.id}>
-                <SingleProduct product={product} />
-                {console.log(product)}
-                <p>Quantity: {product.orderDetail.quantity}</p>
-                <select
-                  name="quanity"
-                  onChange={event =>
-                    this.props.editQuantity(product, event.target.value)
-                  }
-                >
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-                <button
-                  type="button"
-                  onClick={() => this.props.deleteItem(product)}
-                >
-                  Delete
-                </button>
-              </div>
-            )
-          })
+          <CartFull
+            cart={this.props.cart}
+            isLoggedIn={this.props.isLoggedIn}
+            deleteCartItemLoggedIn={this.props.deleteCartItemLoggedIn}
+            deleteCartItemGuest={this.props.deleteCartItemGuest}
+            submitCheckoutLoggedIn={this.props.submitCheckoutLoggedIn}
+            submitCheckoutGuest={this.props.submitCheckoutGuest}
+            user={this.props.user}
+            editQuantityLoggedIn={this.props.editQuantityLoggedIn}
+            editQuantityGuest={this.props.editQuantityGuest}
+          />
         )}
       </div>
     )
@@ -65,10 +44,18 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  editQuantity: (item, value) => dispatch(editItemQuanityAction(item, value)),
-  deleteItem: item => dispatch(deleteCartItemAction(item)),
+  editQuantityLoggedIn: (product, quantity, orderId) =>
+    dispatch(editQuantityLoggedInThunk(product, quantity, orderId)),
   getCartUser: userId => dispatch(getCartUserThunk(userId)),
-  getCartGuest: () => dispatch(getCartGuestThunk())
+  getCartGuest: () => dispatch(getCartGuestThunk()),
+  deleteCartItemGuest: product => dispatch(deleteCartItemGuestThunk(product)),
+  deleteCartItemLoggedIn: (product, orderId) =>
+    dispatch(deleteCartItemLoggedInThunk(product, orderId)),
+  submitCheckoutLoggedIn: userId =>
+    dispatch(submitCheckoutLoggedInThunk(userId)),
+  submitCheckoutGuest: () => dispatch(submitCheckoutAction()),
+  editQuantityGuest: (product, quantity) =>
+    dispatch(editQuantityGuestThunk(product, quantity))
 })
 
 export default connect(mapState, mapDispatch)(CartView)
