@@ -1,7 +1,7 @@
 import React from 'react'
 import {getOrdersThunk} from '../store/orders'
 import {connect} from 'react-redux'
-import SingleOrder from './singleOrder'
+import OrderHistoryFull from './orderHistoryFull'
 
 // all of our individual user's orders
 class DisconnectedOrders extends React.Component {
@@ -21,24 +21,15 @@ class DisconnectedOrders extends React.Component {
       return <div />
     }
     const orders = this.props.orders
+    console.log(orders, 'orders')
     return (
       <section id="orders-table">
         <h1>Order History</h1>
-        <table>
-          <thead>
-            <tr>
-              <th>Order Id</th>
-              <th>Date Purchased</th>
-              <th>Total Amount</th>
-              <th>Order Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.map(order => {
-              return <SingleOrder key={order.id} order={order} />
-            })}
-          </tbody>
-        </table>
+        {orders.length >= 1 ? (
+          <OrderHistoryFull orders={orders} />
+        ) : (
+          <div> You have no past orders</div>
+        )}
       </section>
     )
   }
