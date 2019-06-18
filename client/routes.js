@@ -10,7 +10,8 @@ import {
   ProductDetails,
   CartView,
   Loading,
-  AddProductForm
+  AddProductForm,
+  Welcome
 } from './components'
 import {me} from './store'
 import {getCartUserThunk, getCartGuestThunk} from './store/cart'
@@ -37,6 +38,7 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
+        <Route exact path="/" component={Welcome} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route

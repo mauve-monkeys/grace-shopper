@@ -7,7 +7,7 @@ import {CartNavbar} from '.'
 
 const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
   <section id="navbar">
-    <h1>BOILERMAKER</h1>
+    <h1>Grace Rings</h1>
     <nav>
       <span className="link-group">
         <Link to="/products">Shop</Link>
@@ -34,7 +34,7 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
         </span>
       )}
     </nav>
-    <hr />
+    {/* <hr /> */}
   </section>
 )
 

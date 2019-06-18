@@ -7,7 +7,7 @@ const DisconnectedAddCartButton = props => {
   const {selected, addToCartUser, addToCartGuest, isLoggedIn, userId} = props
 
   return (
-    <div>
+    <div className="cart-button">
       <button
         id="addCartButton"
         type="button"

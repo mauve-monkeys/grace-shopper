@@ -42,7 +42,7 @@ const productsData = [
     size: '6'
   },
   {
-    name: 'Heart of Winter Ring,',
+    name: 'Heart of Winter Ring',
     description:
       'Declare your love for the winter season with this chic sterling silver statement ring. Its embellished heart design is abstract and delicate at the same time, thanks to its shimmering cubic zirconia ice ruby motif.',
     imageUrl: 'https://i.ebayimg.com/images/g/Tr4AAOSwMqBaXUZE/s-l300.jpg',

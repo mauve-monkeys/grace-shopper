@@ -3,10 +3,18 @@
 **********************************************************/
 
 // ------ Variables ------
-$navbar-height: 150px;
+$navbar-height: 130px;
 $header-height: 35px;
+
 $single-product-height: 300px;
 $single-product-width: 320px;
+
+$product-details-header: 50px;
+
+$banner-height: 150px;
+$welcome-img-height: 400px;
+
+$footer-height: 60px;
 
 // -- Navbar --
 #navbar {
@@ -38,13 +46,40 @@ main {
   }
 }
 
+// -- Welcome Page --
+
+.welcome-page {
+  width: 100vw;
+  position: relative;
+
+  img {
+    width: 100%;
+    height: $welcome-img-height;
+  }
+  > div {
+    min-height: $banner-height;
+    position: absolute;
+    top: calc((#{$welcome-img-height / 2}) - (#{$banner-height} / 2));
+    right: calc(50vw / 2);
+    width: 50vw;
+  }
+}
+
+// -- Single Product --
+.product-tile {
+  img,
+  > div {
+    margin: 5px;
+  }
+}
+
 // -- AllProducts --
 #all-products {
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
-  * {
-    margin: 10px;
+  > * {
+    margin: 20px;
   }
   h1 {
     height: $header-height;
@@ -68,7 +103,7 @@ main {
 // -- Form --
 
 .form-container {
-  padding: 5px 10px 10px 10px;
+  padding: 5px 20px 10px 10px;
 
   .form-title {
     margin: 10px 0;
@@ -78,10 +113,11 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: start;
-    min-width: 400px;
+    min-width: 450px;
 
     .form-field-container {
       width: 100%;
+      margin: 10px;
       display: grid;
       grid-template-columns: auto 60px;
       grid-template-rows: auto;
@@ -103,4 +139,52 @@ main {
   .warning {
     grid-column: 2 / 3;
   }
+}
+
+// product details: when you go into a single product page
+#product-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr 20px 1fr 1fr 1fr;
+
+  grid-template-rows: $product-details-header 1fr 1fr 1fr 1fr;
+
+  grid-column-gap: 10px;
+
+  grid-row-gap: 10px;
+
+  .product-name {
+    grid-area: 1 / 1 / 2 / 3;
+  }
+
+  .product-image {
+    grid-area: 2 / 1 / 6 / 3;
+    justify-self: center;
+  }
+
+  .product-text {
+    grid-area: 2 / 4 / 5 / 7;
+    align-self: center;
+    > * {
+      margin: 10px 0;
+    }
+  }
+
+  .cart-button {
+    grid-area: 5 / 5 / 6 / 6;
+  }
+}
+
+.cart-view {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
+
+// -- Footer --
+
+#footer {
+  width: 100vw;
+  height: $footer-height;
+  position: fixed;
+  bottom: 0;
 }
