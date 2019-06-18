@@ -42,15 +42,19 @@ router.post('/logout', (req, res) => {
 })
 
 router.get('/me', (req, res) => {
-  res.json({
-    email: req.user.email,
-    username: req.user.username,
-    id: req.user.id,
-    firstName: req.user.firstName,
-    lastName: req.user.lastName,
-    billingAddress: req.user.billingAddress,
-    shippingAddress: req.user.shippingAddress
-  })
+  if (!req.user) {
+    res.json(null)
+  } else {
+    res.json({
+      email: req.user.email,
+      username: req.user.username,
+      id: req.user.id,
+      firstName: req.user.firstName,
+      lastName: req.user.lastName,
+      billingAddress: req.user.billingAddress,
+      shippingAddress: req.user.shippingAddress
+    })
+  }
 })
 
 router.use('/google', require('./google'))

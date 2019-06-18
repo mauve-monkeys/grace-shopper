@@ -135,23 +135,27 @@ export const addToCartLoggedInThunk = (product, userId, quantity = 1) => {
   }
 }
 
-export const addToCartGuestThunk = product => {
+export const addToCartGuestThunk = (product, quantity = 1) => {
   return dispatch => {
     let cart = deSerializeCart(localStorage.getItem('GScart'))
-    if (cart === null) {
-      cart = []
+    let updatedQuantity = false
+
+    let newCart = cart.map(productObj => {
+      if (productObj.id === product.id) {
+        productObj.orderDetail.quantity += quantity
+        updatedQuantity = true
+      }
+      return productObj
+    })
+
+    if (!updatedQuantity) {
+      product.orderDetail = {quantity}
+      newCart = [...newCart, product]
     }
-    const newCart = [...cart, product]
-    // if (newCart[newCart.length - 1].orderDetail) {
-    //   newCart[newCart.length - 1].orderDetail.quantity++
-    // } else {
-    //   newCart[newCart.length - 1].orderDetail = {
-    //     quantity: 1
-    //   }
-    // }
+
     localStorage.setItem('GScart', serializeCart(newCart))
 
-    dispatch(addCartAction(product))
+    dispatch(addCartAction(product, quantity))
   }
 }
 

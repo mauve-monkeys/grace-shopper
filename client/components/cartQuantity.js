@@ -7,6 +7,11 @@ const CartQuantity = props => {
   const quantity = props.product.orderDetail
     ? props.product.orderDetail.quantity
     : props.quantity
+
+  const editQuantity = props.isLoggedIn
+    ? props.editQuantityLoggedIn
+    : props.editQuantityGuest
+
   return (
     <div>
       <p>
@@ -15,7 +20,7 @@ const CartQuantity = props => {
           name="quantity"
           value={quantity}
           onChange={event =>
-            props.editQuantity(props.product, +event.target.value, orderId)
+            editQuantity(props.product, +event.target.value, orderId)
           }
         >
           <option value="1">1</option>

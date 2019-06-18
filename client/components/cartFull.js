@@ -12,7 +12,9 @@ const CartFull = props => {
               <SingleProduct product={product} />
               <CartQuantity
                 product={product}
-                editQuantity={props.editQuantity}
+                editQuantityLoggedIn={props.editQuantityLoggedIn}
+                editQuantityGuest={props.editQuantityGuest}
+                isLoggedIn={props.isLoggedIn}
               />
               <button
                 type="button"
