@@ -2,11 +2,14 @@ import React from 'react'
 import {getProductDetailsThunk, resetLoading} from '../store/products'
 import {connect} from 'react-redux'
 import {Loading, AddCartButton, CartQuantity} from '.'
+import {editQuantityThunk} from '../store/cart'
 
 class DisconnectedProductDetails extends React.Component {
   constructor() {
     super()
-    this.state = {}
+    this.state = {
+      quantity: 1
+    }
   }
   componentDidMount() {
     try {
@@ -18,6 +21,12 @@ class DisconnectedProductDetails extends React.Component {
 
   componentWillUnmount() {
     this.props.resetLoading('selected')
+  }
+
+  setQuantity = (product, quantity) => {
+    this.setState({
+      quantity
+    })
   }
 
   render() {
@@ -40,7 +49,7 @@ class DisconnectedProductDetails extends React.Component {
 
           <div className="product-price">${selected.price}</div>
 
-          {/* <CartQuantity product={selected} /> */}
+          <CartQuantity product={selected} editQuantity={this.setQuantity} />
           <label>
             Select Size:{' '}
             <select className="ring-select">
@@ -53,7 +62,7 @@ class DisconnectedProductDetails extends React.Component {
           </label>
         </div>
 
-        <AddCartButton />
+        <AddCartButton quantity={this.state.quantity} />
       </section>
     )
   }

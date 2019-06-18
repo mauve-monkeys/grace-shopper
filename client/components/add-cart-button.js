@@ -4,7 +4,14 @@ import {connect} from 'react-redux'
 
 const DisconnectedAddCartButton = props => {
   /// const for props
-  const {selected, addToCartUser, addToCartGuest, isLoggedIn, userId} = props
+  const {
+    selected,
+    addToCartUser,
+    addToCartGuest,
+    isLoggedIn,
+    userId,
+    quantity
+  } = props
 
   return (
     <div className="cart-button">
@@ -13,7 +20,7 @@ const DisconnectedAddCartButton = props => {
         type="button"
         onClick={() => {
           if (isLoggedIn) {
-            addToCartUser(selected, userId)
+            addToCartUser(selected, userId, quantity)
           } else {
             addToCartGuest(selected)
           }
@@ -27,8 +34,8 @@ const DisconnectedAddCartButton = props => {
 
 const mapDispatchToProps = dispatch => ({
   addToCartGuest: product => dispatch(addToCartGuestThunk(product)),
-  addToCartUser: (product, userId) =>
-    dispatch(addToCartLoggedInThunk(product, userId))
+  addToCartUser: (product, userId, quantity) =>
+    dispatch(addToCartLoggedInThunk(product, userId, quantity))
 })
 
 const mapStateToProps = state => ({
