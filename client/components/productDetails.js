@@ -2,7 +2,6 @@ import React from 'react'
 import {getProductDetailsThunk, resetLoading} from '../store/products'
 import {connect} from 'react-redux'
 import {Loading, AddCartButton, CartQuantity} from '.'
-import {editQuantityLoggedInThunk} from '../store/cart'
 
 class DisconnectedProductDetails extends React.Component {
   constructor() {

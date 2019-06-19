@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getUserDetailsThunk, updateUserDetailsThunk} from '../store/user'
+import {me, updateUserDetailsThunk} from '../store/user'
 
 class ProfileForm extends React.Component {
   constructor(props) {
@@ -15,9 +15,7 @@ class ProfileForm extends React.Component {
       billingAddress: props.user.billingAddress
     }
   }
-  componentDidMount() {
-    this.props.getUserDetails(this.props.user.id)
-  }
+
   render() {
     if (!this.props.orders) {
       return <div />
@@ -64,9 +62,10 @@ class ProfileForm extends React.Component {
     )
   }
 
-  handleSumbit(event) {
+  async handleSumbit(event) {
     event.preventDefault()
-    this.props.updateUserDetails(this.props.user.id, this.state)
+    await this.props.updateUserDetails(this.props.user.id, this.state)
+    this.props.getUserDetails()
   }
 
   handleChange(event) {
@@ -79,7 +78,7 @@ class ProfileForm extends React.Component {
 const mapDispatchToProps = dispatch => ({
   updateUserDetails: (userId, values) =>
     dispatch(updateUserDetailsThunk(userId, values)),
-  getUserDetails: userId => dispatch(getUserDetailsThunk(userId))
+  getUserDetails: () => dispatch(me())
 })
 
 const mapStateToProps = state => ({
