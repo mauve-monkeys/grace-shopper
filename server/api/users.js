@@ -36,18 +36,17 @@ router.put('/:userId/edit', async (req, res, next) => {
         id: req.params.userId
       }
     })
-    await user.update(
-      {
-        username: req.body.username,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        shippingAddress: req.body.shippingAddress,
-        billingAddress: req.body.billingAddress
-      }
-      // {
-      //   where: {id: req.params.userId}
-      // }
-    )
+    if (!user) {
+      res.status(404).send('User not found')
+    }
+    await user.update({
+      username: req.body.username,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      shippingAddress: req.body.shippingAddress,
+      billingAddress: req.body.billingAddress
+    })
+    res.status(201).send(user)
   } catch (error) {
     next(error)
   }

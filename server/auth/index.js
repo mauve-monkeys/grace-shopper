@@ -52,7 +52,8 @@ router.get('/me', (req, res) => {
       firstName: req.user.firstName,
       lastName: req.user.lastName,
       billingAddress: req.user.billingAddress,
-      shippingAddress: req.user.shippingAddress
+      shippingAddress: req.user.shippingAddress,
+      isAdmin: req.user.isAdmin
     })
   }
 })
